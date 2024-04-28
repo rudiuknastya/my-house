@@ -24,7 +24,7 @@ function fillInputs(sheet) {
     $breadcrumb.addClass('d-flex flex-wrap gap-2');
     $breadcrumb.html($breadcrumb.html() + `<span>№${sheet.sheetNumber}</span>`);
     $edit.attr('href',
-        $edit.attr('href') + (sheetType === 'INCOME'
+        "../" + (sheetType === 'INCOME'
             ? 'edit-income-sheet/'
             : 'edit-expense-sheet/') + sheetId);
 

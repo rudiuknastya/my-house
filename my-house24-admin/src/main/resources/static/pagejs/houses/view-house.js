@@ -15,7 +15,7 @@ $(window).on('load', function () {
 });
 
 function fillTableWithImages(house) {
-    $('#edit-link').attr('href', `../edit-house/${houseId}`);
+    $('#edit-link').attr('href', `/admin/houses/edit-house/${houseId}`);
     $('title, #house-title, #house-breadcrumb').html(house.name);
     $('#house-name').html(house.name);
     $('#house-address').html(house.address);

@@ -40,7 +40,7 @@ function fillInputs(account) {
     const $edit = $('#edit-link');
     $breadcrumb.addClass('d-flex flex-wrap gap-2')
     $breadcrumb.html($breadcrumb.html() + `<span>№${account.accountNumber}</span>`)
-    $edit.attr('href', $edit.attr('href') + account.id);
+    $edit.attr('href', '../edit-account/'+ account.id);
 
     let balanceText = '-';
     let apartment = '-';

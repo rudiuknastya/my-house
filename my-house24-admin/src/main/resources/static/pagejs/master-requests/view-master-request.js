@@ -37,7 +37,7 @@ function fillInputs(request) {
     const $edit = $('#edit-link');
 
     $breadcrumb.html($breadcrumb.html() + `<span>${masterRequestId}</span>`);
-    $edit.attr('href', $edit.attr('href') + `edit-request/${masterRequestId}`);
+    $edit.attr('href', `../edit-request/${masterRequestId}`);
 
     const statusBadge = function (statusValue) {
         switch (statusValue) {

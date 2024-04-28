@@ -1,7 +1,7 @@
 let tariffId = window.location.pathname.match(/\d+$/);
 let $currentUrl = $('#current-tariff');
 
-$currentUrl.attr('href', $currentUrl.attr('href') + tariffId)
+$currentUrl.attr('href', '../edit-tariff/' + tariffId)
 $(document).ready(function () {
     blockCardDody();
     $.ajax({
