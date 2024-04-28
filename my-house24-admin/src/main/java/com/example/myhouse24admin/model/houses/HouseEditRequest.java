@@ -3,6 +3,7 @@ package com.example.myhouse24admin.model.houses;
 import com.example.myhouse24admin.model.staff.StaffShortResponse;
 import com.example.myhouse24admin.validators.fileValidator.ImageExtension;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,10 +13,10 @@ import java.util.List;
 
 public class HouseEditRequest {
     private Long id;
-    @NotEmpty(message = "{validation-not-empty}")
+    @NotBlank(message = "{validation-not-empty}")
     @Size(max = 100, message = "{validation-size-max}")
     private String name;
-    @NotEmpty(message = "{validation-not-empty}")
+    @NotBlank(message = "{validation-not-empty}")
     @Size(max = 150, message = "{validation-size-max}")
     private String address;
     @NotEmpty(message = "{validation-list-not-empty}")

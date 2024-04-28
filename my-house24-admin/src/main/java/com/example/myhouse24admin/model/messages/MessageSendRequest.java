@@ -1,15 +1,12 @@
 package com.example.myhouse24admin.model.messages;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class MessageSendRequest {
-    @NotEmpty(message = "{validation-field-required}")
+    @NotBlank(message = "{validation-field-required}")
     @Size(max = 100, message = "{validation-size-max}")
     private String subject;
-    @NotEmpty(message = "{validation-field-required}")
+    @NotBlank(message = "{validation-field-required}")
     @Size(max = 3000, message = "{validation-size-max}")
     private String text;
     @Max(value = 1500L, message = "{validation-size-max-value}")

@@ -1,11 +1,12 @@
 package com.example.myhouse24admin.model.houses;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 public class FloorRequest {
     Long id;
-    @NotEmpty(message = "{validation-not-empty}")
+    @NotBlank(message = "{validation-not-empty}")
     @Size(max = 100, message = "{validation-size-max}")
     String name;
     boolean deleted;

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class CashSheetExpenseAddRequest {
-    @NotEmpty(message = "{validation-field-required}")
+    @NotBlank(message = "{validation-field-required}")
     private String creationDate;
     @NotNull(message = "{validation-field-required}")
     @Min(value = 1, message = "{validation-invalid-value}")

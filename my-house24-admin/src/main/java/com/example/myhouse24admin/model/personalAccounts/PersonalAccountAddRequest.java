@@ -3,10 +3,7 @@ package com.example.myhouse24admin.model.personalAccounts;
 import com.example.myhouse24admin.entity.PersonalAccountStatus;
 import com.example.myhouse24admin.validators.personalAccountValidation.NotRequiredApartmentInPersonalAccount;
 import com.example.myhouse24admin.validators.personalAccountValidation.UniquePersonalAccountNumber;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 
 @NotRequiredApartmentInPersonalAccount
 public class PersonalAccountAddRequest {
@@ -14,6 +11,7 @@ public class PersonalAccountAddRequest {
     @NotNull(message = "{validation-field-required}")
     @Pattern(regexp = "^[0-9]{5}-[0-9]{5}$" , message = "{validation-invalid-value}")
     @UniquePersonalAccountNumber
+    @NotBlank(message = "{validation-not-empty}")
     private String accountNumber;
     @NotNull(message = "{validation-field-required}")
     private PersonalAccountStatus status;
