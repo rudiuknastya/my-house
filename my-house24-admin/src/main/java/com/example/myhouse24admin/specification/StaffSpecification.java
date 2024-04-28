@@ -41,6 +41,9 @@ public class StaffSpecification implements Specification<Staff> {
                 }
             }
         });
+
+        predicates.add(criteriaBuilder.isFalse(root.get("deleted")));
+
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
 }
