@@ -48,7 +48,15 @@ public class AuthenticationController {
 
     @GetMapping("/forgotPassword")
     public ModelAndView getForgotPasswordPage() {
-        return new ModelAndView("security/forgotPassword");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return new ModelAndView("security/forgotPassword");
+        } else {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String email = userDetails.getUsername();
+            String uri = roleService.getAllowedEndPoint(email);
+            return new ModelAndView("redirect:"+uri);
+        }
     }
 
     @PostMapping("/forgotPassword")
@@ -60,16 +68,32 @@ public class AuthenticationController {
     }
     @GetMapping("/sentToken")
     public ModelAndView getSentTokenPage() {
-        return new ModelAndView("security/sentToken");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return new ModelAndView("security/sentToken");
+        } else {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String email = userDetails.getUsername();
+            String uri = roleService.getAllowedEndPoint(email);
+            return new ModelAndView("redirect:"+uri);
+        }
     }
     @GetMapping("/changePassword")
     public ModelAndView changePassword(@RequestParam("token")String token){
-        if(passwordResetTokenService.isPasswordResetTokenValid(token)){
-            ModelAndView modelAndView = new ModelAndView("security/changePassword");
-            modelAndView.addObject("token", token);
-            return modelAndView;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            if (passwordResetTokenService.isPasswordResetTokenValid(token)) {
+                ModelAndView modelAndView = new ModelAndView("security/changePassword");
+                modelAndView.addObject("token", token);
+                return modelAndView;
+            } else {
+                return new ModelAndView("security/tokenExpired");
+            }
         } else {
-            return new ModelAndView("security/tokenExpired");
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String email = userDetails.getUsername();
+            String uri = roleService.getAllowedEndPoint(email);
+            return new ModelAndView("redirect:"+uri);
         }
     }
 
@@ -84,11 +108,27 @@ public class AuthenticationController {
     }
     @GetMapping("/success")
     public ModelAndView getSuccessPage() {
-        return new ModelAndView("security/success");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return new ModelAndView("security/success");
+        } else {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String email = userDetails.getUsername();
+            String uri = roleService.getAllowedEndPoint(email);
+            return new ModelAndView("redirect:"+uri);
+        }
     }
     @GetMapping("/tokenExpired")
     public ModelAndView getTokenExpiredPage() {
-        return new ModelAndView("security/tokenExpired");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return new ModelAndView("security/tokenExpired");
+        } else {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String email = userDetails.getUsername();
+            String uri = roleService.getAllowedEndPoint(email);
+            return new ModelAndView("redirect:"+uri);
+        }
     }
 
 
