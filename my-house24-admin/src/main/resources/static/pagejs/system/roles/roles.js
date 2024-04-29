@@ -57,6 +57,9 @@ $("#saveButton").on("click", function(){
     $.ajax({
         type: "POST",
         url: "roles/update",
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         data: {
             managerPermissions: managerChecks,
             accountantPermissions: accountantChecks,

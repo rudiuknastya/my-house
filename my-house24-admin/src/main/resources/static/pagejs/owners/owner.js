@@ -143,12 +143,16 @@ function collectData() {
     return formData;
 }
 function sendData(formData) {
+    console.log("here");
     $.ajax({
         type: "POST",
         url: window.location.href,
         data: formData,
         contentType: false,
         processData: false,
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         success: function (response) {
             window.location.href = response;
         },

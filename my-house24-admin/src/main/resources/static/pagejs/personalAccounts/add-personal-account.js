@@ -230,6 +230,9 @@ function initInputAndSelect() {
             processData: false,
             contentType: false,
             data: formData,
+            headers: {
+                "X-CSRF-TOKEN": token
+            },
             success: function (response) {
                 window.history.back();
             },

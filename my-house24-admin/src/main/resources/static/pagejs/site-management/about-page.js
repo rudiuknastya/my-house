@@ -235,6 +235,9 @@ function sendData(formData) {
         data: formData,
         contentType: false,
         processData: false,
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         success: function () {
             galleryIdsToDelete.length = 0;
             additionalGalleryIdsToDelete.length = 0;

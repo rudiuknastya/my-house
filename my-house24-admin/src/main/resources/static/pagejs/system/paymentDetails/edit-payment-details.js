@@ -56,6 +56,9 @@ $(window).on('load', function () {
             processData: false,
             contentType: false,
             data: formData,
+            headers: {
+                "X-CSRF-TOKEN": token
+            },
             success: function (response) {
                 toastr.success(successMessage);
             },

@@ -52,6 +52,9 @@ function setDefault(setDefaultButton) {
     $.ajax({
         type: "POST",
         url: "templates-settings/set-default/"+id,
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         success: function () {
             getInvoiceTemplates();
             toastr.success(successMessage);
@@ -195,6 +198,9 @@ function sendData(formData) {
         data: formData,
         contentType: false,
         processData: false,
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         success: function () {
             idsToDelete.length = 0;
             $("#newTemplates").empty();

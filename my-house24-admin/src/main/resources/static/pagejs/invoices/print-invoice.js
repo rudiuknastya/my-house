@@ -66,6 +66,9 @@ $("#send-button").on("click", function () {
         $.ajax({
             type: "POST",
             url: "../send-invoice/"+id + "/" + file,
+            headers: {
+                "X-CSRF-TOKEN": token
+            },
             success: function () {
                 toastr.success(messageSent);
             },

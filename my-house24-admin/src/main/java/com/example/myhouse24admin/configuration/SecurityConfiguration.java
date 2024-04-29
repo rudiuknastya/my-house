@@ -42,7 +42,6 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf((c)-> c.disable())
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/assets/**","/pagejs/**", "/admin/forgotPassword", "/admin/sentToken", "/admin/changePassword", "/admin/tokenExpired", "/admin/success").permitAll()
                         .requestMatchers("/admin/**").access(roleBasedVoter)

@@ -196,6 +196,9 @@ $('#save-services').on('click', function () {
         processData: false,
         contentType: false,
         data: formData,
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         success: function (response) {
             toastr.success(successSaveMessage);
             unblockBy('#servicesForm');
@@ -346,6 +349,9 @@ $('#save-units').on('click', function () {
         processData: false,
         contentType: false,
         data: formData,
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         success: function (response) {
             toastr.success(successSaveMessage);
             unblockBy('#measurementUnist');

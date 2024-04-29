@@ -8,6 +8,9 @@ $("#invite-button").on("click", function () {
         data: {
             email: $("#email").val()
         },
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         success: function (response) {
             toastr.success(sentMessage);
             window.location.href = response;

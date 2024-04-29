@@ -293,6 +293,9 @@ function initInputAndSelect() {
             processData: false,
             contentType: false,
             data: formData,
+            headers: {
+                "X-CSRF-TOKEN": token
+            },
             success: function (response) {
                 if (mustReset) {
                     toastr.success(successSaveMessage);

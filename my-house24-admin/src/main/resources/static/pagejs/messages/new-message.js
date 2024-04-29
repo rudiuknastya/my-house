@@ -224,6 +224,9 @@ $('.button-send').on('click', function () {
         processData: false,
         contentType: false,
         data: formData,
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         success: function (response) {
             toastr.success(successMessageOnSend.toString().replace('{}', response));
             setTimeout(() =>window.history.back(), 2000);

@@ -313,6 +313,9 @@ function sendData(formData) {
         data: formData,
         contentType: false,
         processData: false,
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         success: function (response) {
             toastr.success(successMessage);
             window.location.href = response;

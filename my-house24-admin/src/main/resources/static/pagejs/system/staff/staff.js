@@ -226,6 +226,9 @@ function sendInvite(staffId) {
     $.ajax({
         url: 'staff/send-invite?staffId=' + staffId,
         type: 'post',
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         success: function (response) {
             toastr.success('Vse Ok');
 
