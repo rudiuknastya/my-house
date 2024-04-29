@@ -2,6 +2,7 @@ const currHref = window.location.pathname;
 const basePath = currHref.split('/').slice().splice(0, 3).join('/');
 let pageUnreadMessages = 0;
 let pageSizeUnreadMessages = 5;
+var token = $("meta[name='_csrf']").attr("content");
 $('.menu-item a').each(function (i, item) {
     if (currHref === ($(item).attr('href'))) {
         $(item).parent().addClass('active')

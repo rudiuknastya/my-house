@@ -31,6 +31,9 @@ function sendIsRead() {
     $.ajax({
         url: '../read-message/' + messageId,
         type: 'post',
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
         success: function (response) {
         },
         error: function (error) {

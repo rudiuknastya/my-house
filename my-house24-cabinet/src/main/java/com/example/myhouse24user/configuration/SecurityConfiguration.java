@@ -32,7 +32,6 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/assets/**", "/pagejs/**", "/cabinet/forgotPassword",
                                 "/cabinet/sentToken", "/cabinet/changePassword",
