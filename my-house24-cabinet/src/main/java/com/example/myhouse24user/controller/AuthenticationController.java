@@ -52,7 +52,12 @@ public class AuthenticationController {
     }
     @GetMapping("/forgotPassword")
     public ModelAndView getForgotPasswordPage() {
-        return new ModelAndView("security/forgotPassword");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null || authentication instanceof AnonymousAuthenticationToken){
+            return new ModelAndView("security/forgotPassword");
+        } else {
+            return new ModelAndView("redirect:statistic");
+        }
     }
     @PostMapping("/forgotPassword")
     public @ResponseBody ResponseEntity<?> sendPasswordResetToken(@Valid EmailRequest emailRequest,
@@ -63,16 +68,26 @@ public class AuthenticationController {
     }
     @GetMapping("/sentToken")
     public ModelAndView getSentTokenPage() {
-        return new ModelAndView("security/sentToken");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null || authentication instanceof AnonymousAuthenticationToken){
+            return new ModelAndView("security/sentToken");
+        } else {
+            return new ModelAndView("redirect:statistic");
+        }
     }
     @GetMapping("/changePassword")
     public ModelAndView changePassword(@RequestParam("token")String token){
-        if(ownerPasswordResetTokenService.isPasswordResetTokenValid(token)){
-            ModelAndView modelAndView = new ModelAndView("security/changePassword");
-            modelAndView.addObject("token", token);
-            return modelAndView;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            if (ownerPasswordResetTokenService.isPasswordResetTokenValid(token)) {
+                ModelAndView modelAndView = new ModelAndView("security/changePassword");
+                modelAndView.addObject("token", token);
+                return modelAndView;
+            } else {
+                return new ModelAndView("security/tokenExpired");
+            }
         } else {
-            return new ModelAndView("security/tokenExpired");
+            return new ModelAndView("redirect:statistic");
         }
     }
 
@@ -87,11 +102,21 @@ public class AuthenticationController {
     }
     @GetMapping("/success")
     public ModelAndView getSuccessPage() {
-        return new ModelAndView("security/success");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return new ModelAndView("security/success");
+        } else {
+            return new ModelAndView("redirect:statistic");
+        }
     }
     @GetMapping("/tokenExpired")
     public ModelAndView getTokenExpiredPage() {
-        return new ModelAndView("security/tokenExpired");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return new ModelAndView("security/tokenExpired");
+        } else {
+            return new ModelAndView("redirect:statistic");
+        }
     }
     @GetMapping("/register")
     public ModelAndView getRegisterPage() {
