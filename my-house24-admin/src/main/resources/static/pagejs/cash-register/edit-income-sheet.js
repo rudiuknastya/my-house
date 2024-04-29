@@ -37,14 +37,15 @@ function fillInputs(sheet) {
     flatpickrDate.setDate(new Date(sheet.creationDate * 1000));
 
     const personalAccount = sheet.personalAccount;
+    const owner = personalAccount.apartmentOwner;
     $selectOwner.select2({
         debug: true,
         dropdownParent: $('.ownerId-select-wrap'),
         maximumInputLength: 50,
         placeholder: chooseOwner,
         data: [{
-            id: personalAccount.apartmentOwner.id,
-            text: personalAccount.apartmentOwner.fullName
+            id: owner ? owner.id : '',
+            text: owner ? owner.fullName : ''
         }],
         ajax: {
             type: "GET",
