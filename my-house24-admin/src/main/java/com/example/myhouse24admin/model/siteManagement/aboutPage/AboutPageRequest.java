@@ -1,7 +1,9 @@
 package com.example.myhouse24admin.model.siteManagement.aboutPage;
 
 import com.example.myhouse24admin.model.siteManagement.servicesPage.SeoRequest;
+import com.example.myhouse24admin.validators.fileValidator.ImageExtension;
 import com.example.myhouse24admin.validators.fileValidator.aboutPage.ImageNotEmpty;
+import com.example.myhouse24admin.validators.fileValidator.aboutPage.ImagesExtension;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,8 +27,11 @@ public class AboutPageRequest {
     @Size(max = 700,message = "{validation-size-max}")
     private String additionalTextWithoutTags;
     @ImageNotEmpty(message = "{validation-image-required}")
+    @ImageExtension
     private MultipartFile directorImage;
+    @ImagesExtension
     private List<MultipartFile> newImages;
+    @ImagesExtension
     private List<MultipartFile> additionalNewImages;
     private List<MultipartFile> newDocuments;
     private List<Long> galleryIdsToDelete;

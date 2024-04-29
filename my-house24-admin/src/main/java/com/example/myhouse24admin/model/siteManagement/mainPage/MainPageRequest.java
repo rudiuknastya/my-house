@@ -2,6 +2,7 @@ package com.example.myhouse24admin.model.siteManagement.mainPage;
 
 import com.example.myhouse24admin.entity.MainPageBlock;
 import com.example.myhouse24admin.model.siteManagement.servicesPage.SeoRequest;
+import com.example.myhouse24admin.validators.fileValidator.ImageExtension;
 import com.example.myhouse24admin.validators.fileValidator.mainPage.image1.Image1NotEmpty;
 import com.example.myhouse24admin.validators.fileValidator.mainPage.image2.Image2NotEmpty;
 import com.example.myhouse24admin.validators.fileValidator.mainPage.image3.Image3NotEmpty;
@@ -24,10 +25,13 @@ public class MainPageRequest {
     private String textWithoutTags;
     private boolean showLinks;
     @Image1NotEmpty(message = "{validation-image-required}")
+    @ImageExtension
     private MultipartFile image1;
     @Image2NotEmpty(message = "{validation-image-required}")
+    @ImageExtension
     private MultipartFile image2;
     @Image3NotEmpty(message = "{validation-image-required}")
+    @ImageExtension
     private MultipartFile image3;
     @Valid
     private List<MainPageBlockRequest> mainPageBlocks;

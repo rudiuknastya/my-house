@@ -1,5 +1,6 @@
 package com.example.myhouse24admin.model.siteManagement.mainPage;
 
+import com.example.myhouse24admin.validators.fileValidator.BlockImageExtension;
 import com.example.myhouse24admin.validators.fileValidator.mainPage.MainBlockImageNotEmpty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -9,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
         image="image",
         message = "{validation-image-required}"
 )
+@BlockImageExtension
 public class MainPageBlockRequest {
     private Long id;
     @NotBlank(message = "{validation-not-empty}")

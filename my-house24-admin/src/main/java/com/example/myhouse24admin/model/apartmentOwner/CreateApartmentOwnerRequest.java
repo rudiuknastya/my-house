@@ -43,6 +43,7 @@ public record CreateApartmentOwnerRequest(
         @TelegramFieldUnique(message = "{validation-telegram-exist}")
         String telegramUsername,
         @NotBlank(message = "{validation-not-empty}")
+        @Size(max = 100, message = "{validation-size-max}")
         @Pattern(regexp = "[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-z]{2,3}(\\.[a-z]{2,3})?", message = "{validation-email-from-pattern}")
         @OwnerEmailFieldUnique(message = "{validation-email-exist}")
         String email,
