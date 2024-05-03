@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class CashSheetIncomeAddRequest {
 
-    @NotEmpty(message = "{validation-field-required}")
+    @NotBlank(message = "{validation-field-required}")
     private String creationDate;
     @NotNull(message = "{validation-field-required}")
     private Long ownerId;

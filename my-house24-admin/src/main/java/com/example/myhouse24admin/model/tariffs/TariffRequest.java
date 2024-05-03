@@ -1,6 +1,7 @@
 package com.example.myhouse24admin.model.tariffs;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
@@ -10,10 +11,10 @@ public class TariffRequest {
 
     private Long id;
     @Size(min = 3, max = 100, message = "{validation-size-min-max}")
-    @NotEmpty(message = "{validation-not-empty}")
+    @NotBlank(message = "{validation-not-empty}")
     private String name;
     @Size(min = 3, max = 350, message = "{validation-size-min-max}")
-    @NotEmpty(message = "{validation-not-empty}")
+    @NotBlank(message = "{validation-not-empty}")
     private String description;
     @Valid
     private List<TariffItemRequest> tariffItems;

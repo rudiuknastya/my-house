@@ -29,7 +29,7 @@ function maxInputLength(input, maxLength) {
 }
 
 function trimInputsValue() {
-    $('input, textarea').each(function () {
+    $('input[type="text"], textarea').each(function () {
         $(this).val($.trim($(this).val()));
     });
 }

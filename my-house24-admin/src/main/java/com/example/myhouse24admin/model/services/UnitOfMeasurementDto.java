@@ -1,12 +1,13 @@
 package com.example.myhouse24admin.model.services;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 
 public class UnitOfMeasurementDto {
     private Long id;
-    @NotEmpty(message = "{validation-not-empty}")
+    @NotBlank(message = "{validation-not-empty}")
     @Size(min = 1, max = 10, message = "{validation-size-min-max}")
     private String name;
 

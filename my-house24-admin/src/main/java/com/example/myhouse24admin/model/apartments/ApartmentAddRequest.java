@@ -2,6 +2,7 @@ package com.example.myhouse24admin.model.apartments;
 
 import com.example.myhouse24admin.validators.apartmentValidation.RequiredNewOrPresentAccount;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @RequiredNewOrPresentAccount(message = "{validation-field-required}")
@@ -17,7 +18,7 @@ public class ApartmentAddRequest {
     private Long ownerId;
     @NotNull(message = "{validation-field-required}")
     private Long tariffId;
-    @NotNull(message = "{validation-field-required}")
+    @NotBlank(message = "{validation-field-required}")
     @Min(value = 1, message = "{validation-field-required}")
     private String apartmentNumber;
     @NotNull(message = "{validation-field-required}")

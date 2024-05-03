@@ -3,6 +3,7 @@ package com.example.myhouse24admin.model.masterRequest;
 import com.example.myhouse24admin.entity.MasterRequestStatus;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -16,14 +17,14 @@ public class MasterRequestAddRequest {
     private String visitTime;
     @NotNull(message = "{validation-field-required}")
     private Long apartmentOwnerId;
-    @NotEmpty(message = "{validation-field-required}")
+    @NotBlank(message = "{validation-field-required}")
     private String apartmentOwnerPhone;
     @Size(max = 200, message = "{validation-size-max}")
-    @NotEmpty(message = "{validation-field-required}")
+    @NotBlank(message = "{validation-field-required}")
     private String description;
     @NotNull(message = "{validation-field-required}")
     private Long apartmentId;
-    @NotEmpty(message = "{validation-field-required}")
+    @NotBlank(message = "{validation-field-required}")
     private String masterType;
     @Enumerated(EnumType.STRING)
     private MasterRequestStatus status;

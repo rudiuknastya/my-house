@@ -124,13 +124,11 @@ function addNewStaff() {
     initStaffSelect2(lastStaffIndex);
     lastStaffIndex++;
 }
-
+let selectedStaff = [];
 function initStaffSelect2(index) {
-    console.log('connect to: ' + index)
     let $staffSelect = $(`[name="staffIds[${index}]"]`);
     $staffSelect.select2({
         placeholder: houseStaffNameLabel,
-        // minimumResultsForSearch: -1,
         maximumInputLength: 50,
         ajax: {
             type: "GET",
@@ -139,7 +137,8 @@ function initStaffSelect2(index) {
                 return {
                     name: params.term || '',
                     page: (params.page - 1) || 0,
-                    pageSize: 10
+                    pageSize: 10,
+                    notIds: selectedStaff.toLocaleString()
                 };
             },
             processResults: function (response) {
@@ -165,7 +164,10 @@ function initStaffSelect2(index) {
             url: '../system-settings/staff/get-staff/' + $(this).val(),
             success: function (response) {
                 let roleLabel = getRoleLabel(response.role.name);
-                $(`[name="staffs[${index}].role"]`).val(roleLabel);
+                let $roleInput = $(`[name="staffs[${index}].role"]`);
+                $roleInput.val(roleLabel);
+                $roleInput.attr('data-staffId', response.id);
+                selectedStaff.push(response.id);
             },
             error: function () {
                 toastr.error(errorMessage);
@@ -226,6 +228,9 @@ function deleteFloor() {
 
 function deleteStaff() {
     const staffItem = $(this).closest('.staff-item');
+    const blockId = staffItem.attr('id').match(/\d+$/);
+    const staffId = staffItem.find(`input[name="staff[${blockId}].role"]`).attr('data-staffId');
+    selectedStaff = selectedStaff.filter(staff => staff.id !== staffId);
     staffItem.hide('');
     setTimeout(function () {
         staffItem.remove();

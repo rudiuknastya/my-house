@@ -7,6 +7,7 @@ import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +40,21 @@ public class StaffSpecification implements Specification<Staff> {
                         predicates.add(criteriaBuilder.equal(roleStaffJoin.get("name"), value));
                     }
                 }
+                case "notIds" -> {
+                    if (!value.isEmpty()) {
+                        Arrays.stream(value.split(",")).toList()
+                                .stream()
+                                .map(Long::valueOf)
+                                .toList()
+                                .forEach(id -> predicates.add(criteriaBuilder.notEqual(root.get("id"), id))
+                                );
+                    }
+                }
             }
         });
+
+        predicates.add(criteriaBuilder.isFalse(root.get("deleted")));
+
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
 }

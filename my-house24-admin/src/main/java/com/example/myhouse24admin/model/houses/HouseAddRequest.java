@@ -3,10 +3,7 @@ package com.example.myhouse24admin.model.houses;
 import com.example.myhouse24admin.validators.fileValidator.FirstFileRequired;
 import com.example.myhouse24admin.validators.fileValidator.ImageExtension;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -14,10 +11,10 @@ import java.util.List;
 
 public class HouseAddRequest {
     private Long id;
-    @NotEmpty(message = "{validation-not-empty}")
+    @NotBlank(message = "{validation-not-empty}")
     @Size(max = 100, message = "{validation-size-max}")
     private String name;
-    @NotEmpty(message = "{validation-not-empty}")
+    @NotBlank(message = "{validation-not-empty}")
     @Size(max = 150, message = "{validation-size-max}")
     private String address;
     @NotEmpty(message = "{validation-list-not-empty}")

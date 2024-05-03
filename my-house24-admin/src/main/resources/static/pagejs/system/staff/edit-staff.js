@@ -132,7 +132,7 @@ $(".button-save").on("click", function () {
     trimInputsValue();
 
     let formData = new FormData();
-
+    delete staff.role;
     for (var key in staff) {
         formData.append(key, staff[key]);
     }

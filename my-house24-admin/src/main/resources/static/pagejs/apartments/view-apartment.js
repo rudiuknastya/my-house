@@ -27,7 +27,7 @@ function fillInputs(apartment) {
     const $edit = $('#edit-link');
     $breadcrumb.html($breadcrumb.html() + title)
     $curr.html($curr.html() + title);
-    $edit.attr('href', $edit.attr('href') + apartment.id);
+    $edit.attr('href', '../../apartments/edit-apartment/' + apartment.id);
 
     $('#personal-account').html(`<a href="../../personal-accounts/veiw-account/${apartment.personalAccount.id}">
                                             ${apartment.personalAccount.accountNumber}</a>`);

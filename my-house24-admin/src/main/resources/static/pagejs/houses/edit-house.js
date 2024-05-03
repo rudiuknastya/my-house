@@ -137,7 +137,7 @@ function addNewFloor(floor) {
     }
     lastFloorIndex++;
 }
-
+let selectedStaff = [];
 function addNewStaff(staff) {
     let $staff = $(`<div class="row g-4 staff-item" id="staff-${lastStaffIndex}">
                         <div class="mb-3 d-flex gap-3">
@@ -177,6 +177,9 @@ function addNewStaff(staff) {
 
 function initStaffSelect2(index, staff) {
     let $staffSelect = $(`[name="staff[${index}].id"]`);
+    if (staff.id > 0) {
+        selectedStaff = staff.id;
+    }
     $staffSelect.select2({
         placeholder: houseStaffNameLabel,
         maximumInputLength: 50,
@@ -192,7 +195,8 @@ function initStaffSelect2(index, staff) {
                 return {
                     name: params.term || '',
                     page: (params.page - 1) || 0,
-                    pageSize: 10
+                    pageSize: 10,
+                    notIds: selectedStaff.toLocaleString()
                 };
             },
             processResults: function (response) {
@@ -220,7 +224,10 @@ function initStaffSelect2(index, staff) {
             url: '../../system-settings/staff/get-staff/' + $(this).val(),
             success: function (response) {
                 let roleLabel = getRoleLabel(response.role.name);
-                $(`[name="staffs[${index}].role"]`).val(roleLabel);
+                let $roleInput = $(`[name="staffs[${index}].role"]`);
+                $roleInput.val(roleLabel);
+                $roleInput.attr('data-staffId', response.id);
+                selectedStaff.push(response.id);
             },
             error: function () {
                 toastr.error(errorMessage);
@@ -275,6 +282,9 @@ function deleteFloor() {
 
 function deleteStaff() {
     const staffItem = $(this).closest('.staff-item');
+    const blockId = staffItem.attr('id').match(/\d+$/);
+    const staffId = staffItem.find(`input[name="staff[${blockId}].role"]`).attr('data-staffId');
+    selectedStaff = selectedStaff.filter(staff => staff.id !== staffId);
     staffItem.hide('');
     setTimeout(function () {
         staffItem.remove();

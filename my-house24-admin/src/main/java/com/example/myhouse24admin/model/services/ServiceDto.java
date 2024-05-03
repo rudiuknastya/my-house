@@ -1,5 +1,6 @@
 package com.example.myhouse24admin.model.services;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -7,7 +8,7 @@ import jakarta.validation.constraints.Size;
 public class ServiceDto {
     private Long id;
     @Size(min = 3, max = 100, message = "{validation-size-min-max}")
-    @NotEmpty(message = "{validation-not-empty}")
+    @NotBlank(message = "{validation-not-empty}")
     private String name;
     private boolean showInMeter;
     @NotNull(message = "{validation-not-empty}")
