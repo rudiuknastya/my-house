@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -90,6 +91,7 @@ class PaymentDetailsControllerTest {
     void updatePaymentDetails() throws Exception {
         // given
         var request = post("/admin/system-settings/payment-details/update-details")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("paymentDetailsDto", paymentDetailsDto);
 

@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -71,6 +72,7 @@ class RoleControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/system-settings/roles/update")
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .param("managerPermissions[]","true")
                         .param("accountantPermissions[]","true")

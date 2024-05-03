@@ -196,25 +196,13 @@ function collectData() {
     formData.append("aboutTextWithoutTags", aboutText.getText($("#aboutText")));
     formData.append("additionalText", additionalText.root.innerHTML);
     formData.append("additionalTextWithoutTags", additionalText.getText($("#additionalText")));
+    formData.append("galleryIdsToDelete[]", galleryIdsToDelete);
+    formData.append("additionalGalleryIdsToDelete[]", additionalGalleryIdsToDelete);
+    formData.append("documentIdsToDelete[]", documentIdsToDelete);
+    formData.append("newImages[]", galleryUploadedFiles);
+    formData.append("additionalNewImages[]", additionalGalleryUploadedFiles);
+    formData.append("newDocuments[]", documentUploadedFiles);
 
-    for(let id of galleryIdsToDelete){
-        formData.append("galleryIdsToDelete[]", id);
-    }
-    for(let id of additionalGalleryIdsToDelete){
-        formData.append("additionalGalleryIdsToDelete[]", id);
-    }
-    for(let id of documentIdsToDelete){
-        formData.append("documentIdsToDelete[]", id);
-    }
-    for(let newImage of galleryUploadedFiles){
-        formData.append("newImages[]", newImage);
-    }
-    for(let newImage of additionalGalleryUploadedFiles){
-        formData.append("additionalNewImages[]", newImage);
-    }
-    for(let newDocument of documentUploadedFiles){
-        formData.append("newDocuments[]", newDocument);
-    }
     let directorImage = $("#directorImage").prop("files")[0];
     if(directorImage === undefined) {
         formData.append("directorImage", new File([""], "filename"));

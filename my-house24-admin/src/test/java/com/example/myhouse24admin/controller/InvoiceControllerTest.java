@@ -30,6 +30,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -143,6 +144,7 @@ class InvoiceControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/invoices/add")
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", invoiceRequest))
                 .andDo(print())
@@ -155,6 +157,7 @@ class InvoiceControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/invoices/add")
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", new InvoiceRequest()))
                 .andDo(print())
@@ -407,6 +410,7 @@ class InvoiceControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/invoices/edit/{id}",1)
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", invoiceRequest))
                 .andDo(print())
@@ -419,6 +423,7 @@ class InvoiceControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/invoices/edit/{id}",1)
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", new InvoiceRequest()))
                 .andDo(print())
@@ -513,6 +518,7 @@ class InvoiceControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/invoices/copy/{id}", 1)
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", invoiceRequest))
                 .andDo(print())
@@ -524,6 +530,7 @@ class InvoiceControllerTest {
         doNothing().when(invoiceService).createInvoice(any(InvoiceRequest.class));
         this.mockMvc.perform(post("/my-house/admin/invoices/add")
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", new InvoiceRequest()))
                 .andDo(print())
@@ -575,6 +582,7 @@ class InvoiceControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/invoices/view-invoice/send-invoice/{id}/{template}", 1, "template")
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk());

@@ -21,6 +21,7 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -106,6 +107,7 @@ class MessagesControllerTest {
         messageSendRequest.setTextLength(3L);
 
         var request = post("/admin/messages/new-message")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("messageSendRequest", messageSendRequest);
 
@@ -209,6 +211,7 @@ class MessagesControllerTest {
     void deleteMessages() throws Exception {
         // given
         var request = delete("/admin/messages/delete-messages")
+                .with(csrf())
                 .with(user(userDetails))
                 .param("messagesToDelete", "1,2,3");
 
@@ -227,6 +230,7 @@ class MessagesControllerTest {
     void deleteMessages_WhenThrowsException() throws Exception {
         // given
         var request = delete("/admin/messages/delete-messages")
+                .with(csrf())
                 .with(user(userDetails))
                 .param("messagesToDelete", "1,2,3");
 

@@ -22,11 +22,14 @@ public class ImageExtensionValidator implements ConstraintValidator<ImageExtensi
                 logger.error(e.getMessage());
             }
             if (detectedType != null) {
-                return detectedType.equals("image/png")
-                        || detectedType.equals("image/jpg")
-                        || detectedType.equals("image/jpeg");
+                return isExtensionValid(detectedType);
             }
         }
         return true;
+    }
+    private boolean isExtensionValid(String detectedType){
+        return detectedType.equals("image/png")
+                || detectedType.equals("image/jpg")
+                || detectedType.equals("image/jpeg");
     }
 }

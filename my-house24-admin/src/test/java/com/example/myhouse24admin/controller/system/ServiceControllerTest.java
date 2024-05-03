@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -67,6 +68,7 @@ class ServiceControllerTest {
         var units = new UnitOfMeasurementDtoListWrap();
         units.setUnitOfMeasurements(List.of(unitOfMeasurementDto));
         var request = post("/admin/system-settings/services/update-measurement-unist")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("units", units);
 
@@ -87,6 +89,7 @@ class ServiceControllerTest {
         var units = new UnitOfMeasurementDtoListWrap();
         units.setUnitOfMeasurements(List.of(unitOfMeasurementDto));
         var request = post("/admin/system-settings/services/update-measurement-unist")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("units", units);
 
@@ -178,6 +181,7 @@ class ServiceControllerTest {
         var services = new ServiceDtoListWrap();
         services.setServices(List.of(serviceDto, serviceDto));
         var request = post("/admin/system-settings/services/update-services")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("servicesList", services);
 
@@ -201,6 +205,7 @@ class ServiceControllerTest {
         var services = new ServiceDtoListWrap();
         services.setServices(List.of(serviceDto, serviceDto));
         var request = post("/admin/system-settings/services/update-services")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("servicesList", services);
 

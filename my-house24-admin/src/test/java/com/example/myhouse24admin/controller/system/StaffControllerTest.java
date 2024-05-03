@@ -25,6 +25,7 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -135,6 +136,7 @@ class StaffControllerTest {
                 staff.getStatus()
         );
         var request = post("/admin/system-settings/staff/add")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("staffEditRequest", staffEditRequest);
 
@@ -286,6 +288,7 @@ class StaffControllerTest {
                 staff.getStatus()
         );
         var request = post("/admin/system-settings/staff/edit-staff/1")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("staffEditRequest", staffEditRequest);
 
@@ -316,6 +319,7 @@ class StaffControllerTest {
                 staff.getStatus()
         );
         var request = post("/admin/system-settings/staff/edit-staff/1")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("staffEditRequest", staffEditRequest);
 
@@ -347,6 +351,7 @@ class StaffControllerTest {
                 staff.getStatus()
         );
         var request = post("/admin/system-settings/staff/edit-staff/1")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("staffEditRequest", staffEditRequest);
 
@@ -378,6 +383,7 @@ class StaffControllerTest {
                 staff.getStatus()
         );
         var request = post("/admin/system-settings/staff/edit-staff/1")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("staffEditRequest", staffEditRequest);
 
@@ -397,6 +403,7 @@ class StaffControllerTest {
     void deleteStaffById_WhenSuccessDelete() throws Exception {
         // given
         var request = delete("/admin/system-settings/staff/delete/1")
+                .with(csrf())
                 .with(user(userDetails));
 
         // when
@@ -415,6 +422,7 @@ class StaffControllerTest {
     void deleteStaffById_WhenDeletingIsFailed() throws Exception {
         // given
         var request = delete("/admin/system-settings/staff/delete/1")
+                .with(csrf())
                 .with(user(userDetails));
 
         // when
@@ -433,6 +441,7 @@ class StaffControllerTest {
     void sendInviteToStaff() throws Exception {
         // given
         var request = post("/admin/system-settings/staff/send-invite")
+                .with(csrf())
                 .with(user(userDetails))
                 .param("staffId", "1");
 

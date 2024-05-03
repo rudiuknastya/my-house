@@ -26,6 +26,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -208,6 +209,7 @@ class MeterReadingControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/add")
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "true")
                         .flashAttr("meterReadingRequest", validMeterReadingRequest))
@@ -223,6 +225,7 @@ class MeterReadingControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/add")
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "true")
                         .flashAttr("meterReadingRequest", meterReadingRequest))
@@ -275,6 +278,7 @@ class MeterReadingControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/edit/{id}",1)
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "true")
                         .flashAttr("meterReadingRequest", validMeterReadingRequest))
@@ -291,6 +295,7 @@ class MeterReadingControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/edit/{id}",1)
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "true")
                         .flashAttr("meterReadingRequest", meterReadingRequest))
@@ -386,6 +391,7 @@ class MeterReadingControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/add/{id}",1)
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "true")
                         .flashAttr("meterReadingRequest", validMeterReadingRequest))
@@ -399,6 +405,7 @@ class MeterReadingControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/add/{id}",1)
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "false")
                         .flashAttr("meterReadingRequest", validMeterReadingRequest))

@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -70,6 +71,7 @@ class ContactsPageControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/site-management/contacts-page")
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("contactsPageDto", contactsPageDto))
                 .andDo(print())
@@ -83,6 +85,7 @@ class ContactsPageControllerTest {
 
         this.mockMvc.perform(post("/my-house/admin/site-management/contacts-page")
                         .contextPath("/my-house")
+                        .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("contactsPageDto", notValidContactsPageDto))
                 .andDo(print())

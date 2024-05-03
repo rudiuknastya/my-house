@@ -26,6 +26,7 @@ import java.util.*;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -223,6 +224,7 @@ class PersonalAccountControllerTest {
         personalAccountAddRequest.setApartmentId(1L);
 
         var request = post("/admin/personal-accounts/add")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", personalAccountAddRequest);
 
@@ -249,6 +251,7 @@ class PersonalAccountControllerTest {
         var personalAccountAddRequest = new PersonalAccountAddRequest();
 
         var request = post("/admin/personal-accounts/add")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", personalAccountAddRequest);
 
@@ -317,6 +320,7 @@ class PersonalAccountControllerTest {
         personalAccountUpdateRequest.setApartmentId(1L);
 
         var request = post("/admin/personal-accounts/edit-account/1")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", personalAccountUpdateRequest);
 
@@ -348,6 +352,7 @@ class PersonalAccountControllerTest {
         personalAccountUpdateRequest.setApartmentId(1L);
 
         var request = post("/admin/personal-accounts/edit-account/1")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", personalAccountUpdateRequest);
 

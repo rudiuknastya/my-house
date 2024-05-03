@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -169,6 +170,7 @@ class PaymentItemControllerTest {
     void testEditItemById1_WhenRequestIsNotValid() throws Exception {
         // given
         var request = post("/admin/system-settings/payment-items/edit-item/1")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("paymentItem", new PaymentItemDto());
 
@@ -186,6 +188,7 @@ class PaymentItemControllerTest {
     void testEditItemById1_WhenRequestIsValid() throws Exception {
         // given
         var request = post("/admin/system-settings/payment-items/edit-item/1")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("paymentItem", paymentItemDto);
 
@@ -203,6 +206,7 @@ class PaymentItemControllerTest {
     void addItem() throws Exception {
         // given
         var request = post("/admin/system-settings/payment-items/add-item")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("paymentItem", paymentItemDto);
 
@@ -241,6 +245,7 @@ class PaymentItemControllerTest {
     void deletePaymentItem_WhenSuccessDeleted() throws Exception {
         // given
         var request = delete("/admin/system-settings/payment-items/delete/1")
+                .with(csrf())
                 .with(user(userDetails));
 
         // when
@@ -258,6 +263,7 @@ class PaymentItemControllerTest {
     void deletePaymentItem_WhenFailDeleted() throws Exception {
         // given
         var request = delete("/admin/system-settings/payment-items/delete/1")
+                .with(csrf())
                 .with(user(userDetails));
 
         // when

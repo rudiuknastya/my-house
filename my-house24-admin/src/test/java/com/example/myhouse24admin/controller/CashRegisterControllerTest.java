@@ -29,6 +29,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -213,6 +214,7 @@ class CashRegisterControllerTest {
 
 
         var request = post("/admin/cash-register/add-income-sheet")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("addRequest", addRequest);
 
@@ -293,6 +295,7 @@ class CashRegisterControllerTest {
         updateRequest.setComment("testComment");
 
         var request = post("/admin/cash-register/edit-income-sheet/1")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("updateRequest", updateRequest);
 
@@ -322,6 +325,7 @@ class CashRegisterControllerTest {
         addRequest.setComment("testComment");
 
         var request = post("/admin/cash-register/add-expense-sheet")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("addRequest", addRequest);
 
@@ -352,6 +356,7 @@ class CashRegisterControllerTest {
         updateRequest.setComment("testComment");
 
         var request = post("/admin/cash-register/edit-expense-sheet/1")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("updateRequest", updateRequest);
 
@@ -461,6 +466,7 @@ class CashRegisterControllerTest {
     void deleteCashSheet_WhenSuccessDelete() throws Exception {
         // given
         var request = delete("/admin/cash-register/delete-sheet/1")
+                .with(csrf())
                 .with(user(userDetails));
 
         // when
@@ -479,6 +485,7 @@ class CashRegisterControllerTest {
     void deleteCashSheet_WhenDeleteIsFail() throws Exception {
         // given
         var request = delete("/admin/cash-register/delete-sheet/1")
+                .with(csrf())
                 .with(user(userDetails));
 
         // when

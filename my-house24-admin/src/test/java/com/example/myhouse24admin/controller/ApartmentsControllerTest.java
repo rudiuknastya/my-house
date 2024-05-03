@@ -26,6 +26,7 @@ import java.util.Optional;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -137,6 +138,7 @@ class ApartmentsControllerTest {
 
 
         var request = post("/admin/apartments/add")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("apartmentAddRequest", addRequest);
 
@@ -254,6 +256,7 @@ class ApartmentsControllerTest {
 
 
         var request = post("/admin/apartments/edit-apartment/1")
+                .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("apartmentAddRequest", addRequest);
 
@@ -277,6 +280,7 @@ class ApartmentsControllerTest {
     void deleteApartment() throws Exception {
         // given
         var request = delete("/admin/apartments/delete-apartment/1")
+                .with(csrf())
                 .with(user(userDetails));
 
         // when

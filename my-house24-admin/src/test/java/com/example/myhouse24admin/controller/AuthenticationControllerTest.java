@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -84,6 +85,7 @@ class AuthenticationControllerTest {
     @Test
     void sendPasswordResetToken_EmailRequest_Not_Valid() throws Exception {
         this.mockMvc.perform(post("/admin/forgotPassword")
+                        .with(csrf())
                         .flashAttr("emailRequest",new EmailRequest("")))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
@@ -139,6 +141,7 @@ class AuthenticationControllerTest {
         when(passwordResetTokenService.isPasswordResetTokenValid(anyString())).thenReturn(false);
 
         this.mockMvc.perform(post("/admin/changePassword")
+                        .with(csrf())
                         .param("token","token")
                         .flashAttr("forgotPasswordRequest", forgotPasswordRequest))
                 .andDo(print())
@@ -149,6 +152,7 @@ class AuthenticationControllerTest {
         ForgotPasswordRequest forgotPasswordRequest =
                 new ForgotPasswordRequest("", "Anastasiia");
         this.mockMvc.perform(post("/admin/changePassword")
+                        .with(csrf())
                         .param("token","token")
                         .flashAttr("forgotPasswordRequest", forgotPasswordRequest))
                 .andDo(print())
