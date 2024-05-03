@@ -23,7 +23,9 @@ $(document).ready(function () {
     });
 
     $.ajax({
-        type: "GET", url: "/" + root + "/admin/getPermissions", data: {
+        type: "GET",
+        url: "/" + root + "/admin/getPermissions",
+        data: {
             role: roles[0].authority
         }, success: function (response) {
             showMenuItems(response);
@@ -103,7 +105,19 @@ $("#logoutLink").on("click", function (e) {
 });
 
 function logout() {
-    window.location = $('#logoutLink').attr('href');
+    $.ajax({
+        type: "POST",
+        url: "/" + root + "/admin/logout",
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
+        success: function () {
+            window.location.href = 'login?logout';
+        },
+        error: function () {
+        }
+    });
+    // window.location = $('#logoutLink').attr('href');
 }
 
 $(window).on('load, ajaxStop', function () {

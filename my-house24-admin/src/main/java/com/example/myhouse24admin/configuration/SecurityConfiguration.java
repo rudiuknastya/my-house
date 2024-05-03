@@ -58,6 +58,7 @@ public class SecurityConfiguration {
                         .tokenRepository(persistentTokenRepository()))
                 .logout((logout) -> logout
                         .logoutUrl("/admin/logout")
+                        .deleteCookies("JSESSIONID")
                         .permitAll())
                 .addFilterBefore(recaptchaFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
