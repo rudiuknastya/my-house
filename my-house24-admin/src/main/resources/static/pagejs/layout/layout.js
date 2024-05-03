@@ -1,7 +1,7 @@
 const currentUrl = window.location.href;
 const myArray = currentUrl.split("/");
-var root = myArray[3];
-var token = $("meta[name='_csrf']").attr("content");
+let root = myArray[3];
+let token = $("meta[name='_csrf']").attr("content");
 let getOwnersData = {
     page: 0,
     pageSize: 5,
