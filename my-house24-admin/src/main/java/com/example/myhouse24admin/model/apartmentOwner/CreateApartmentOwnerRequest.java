@@ -2,6 +2,7 @@ package com.example.myhouse24admin.model.apartmentOwner;
 
 import com.example.myhouse24admin.entity.OwnerStatus;
 import com.example.myhouse24admin.validators.emailValidation.owners.OwnerEmailFieldUnique;
+import com.example.myhouse24admin.validators.fileValidator.ImageExtension;
 import com.example.myhouse24admin.validators.passwordValidation.PasswordsMatch;
 import com.example.myhouse24admin.validators.phoneValidation.owners.OwnerPhoneFieldUnique;
 import com.example.myhouse24admin.validators.socialsValidation.telegram.TelegramFieldUnique;
@@ -10,6 +11,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
+
 @PasswordsMatch(
         password = "password",
         confirmPassword = "confirmPassword"
@@ -56,7 +59,8 @@ public record CreateApartmentOwnerRequest(
         @NotBlank(message = "{validation-not-empty}")
         String password,
         @NotBlank(message = "{validation-not-empty}")
-        String confirmPassword
-
+        String confirmPassword,
+        @ImageExtension
+        MultipartFile avatar
 ) {
 }

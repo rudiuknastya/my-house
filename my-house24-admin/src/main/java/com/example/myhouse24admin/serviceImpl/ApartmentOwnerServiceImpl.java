@@ -59,9 +59,9 @@ public class ApartmentOwnerServiceImpl implements ApartmentOwnerService {
     }
 
     @Override
-    public void createApartmentOwner(CreateApartmentOwnerRequest createApartmentOwnerRequest, MultipartFile avatar) {
+    public void createApartmentOwner(CreateApartmentOwnerRequest createApartmentOwnerRequest) {
         logger.info("createApartmentOwner - Creating apartment owner");
-        String savedImageName = saveImage(avatar);
+        String savedImageName = saveImage(createApartmentOwnerRequest.avatar());
         String newOwnerId = createOwnerId();
         ApartmentOwner apartmentOwner = apartmentOwnerMapper.apartmentOwnerRequestToApartmentOwner(createApartmentOwnerRequest,
                 passwordEncoder.encode(createApartmentOwnerRequest.password()),
@@ -71,7 +71,7 @@ public class ApartmentOwnerServiceImpl implements ApartmentOwnerService {
     }
 
     private String saveImage(MultipartFile multipartFile) {
-        if (multipartFile == null) {
+        if (multipartFile.isEmpty()) {
             return uploadFileUtil.saveDefaultOwnerImage();
         }
         return uploadFileUtil.saveMultipartFile(multipartFile);
@@ -107,7 +107,7 @@ public class ApartmentOwnerServiceImpl implements ApartmentOwnerService {
     }
 
     @Override
-    public void updateApartmentOwner(EditApartmentOwnerRequest editApartmentOwnerRequest, Long id, MultipartFile multipartFile) {
+    public void updateApartmentOwner(EditApartmentOwnerRequest editApartmentOwnerRequest, Long id) {
         logger.info("updateApartmentOwner - Updating apartment owner with id " + id);
         ApartmentOwner apartmentOwner = apartmentOwnerRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Owner not found by id " + id));
         if (editApartmentOwnerRequest.password().isEmpty()) {
@@ -117,13 +117,13 @@ public class ApartmentOwnerServiceImpl implements ApartmentOwnerService {
             mailService.sendNewPassword(editApartmentOwnerRequest.email(), editApartmentOwnerRequest.password());
 
         }
-        updateImage(multipartFile, apartmentOwner);
+        updateImage(editApartmentOwnerRequest.avatar(), apartmentOwner);
         apartmentOwnerRepo.save(apartmentOwner);
         logger.info("updateApartmentOwner - Apartment owner was updated");
     }
 
     private void updateImage(MultipartFile multipartFile, ApartmentOwner apartmentOwner) {
-        if (multipartFile != null) {
+        if (!multipartFile.isEmpty()) {
             String createdImageName = uploadFileUtil.saveMultipartFile(multipartFile);
             apartmentOwner.setAvatar(createdImageName);
         }

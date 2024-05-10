@@ -22,6 +22,7 @@ import java.util.List;
 import static com.example.myhouse24user.config.TestConfig.USER_EMAIL;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -167,6 +168,7 @@ class MessagesControllerTest {
     void deleteMessages_WhenRequestIsValid() throws Exception {
         // given
         var request = delete("/cabinet/messages/delete-messages")
+                .with(csrf())
                 .with(user(userDetails))
                 .param("messagesToDelete", "1");
 
@@ -186,6 +188,7 @@ class MessagesControllerTest {
     void deleteMessages_WhenRequestIsNotValid() throws Exception {
         // given
         var request = delete("/cabinet/messages/delete-messages")
+                .with(csrf())
                 .with(user(userDetails))
                 .param("messagesToDelete", "1");
 
@@ -204,6 +207,7 @@ class MessagesControllerTest {
     void readMessage_ReadMessageById() throws Exception {
         // given
         var request = post("/cabinet/messages/read-message/%s".formatted(1))
+                .with(csrf())
                 .with(user(userDetails));
 
         // when
@@ -221,6 +225,7 @@ class MessagesControllerTest {
     void testReadMessage_ReadAllMessagesByIds() throws Exception {
         // given
         var request = post("/cabinet/messages/read-all-messages")
+                .with(csrf())
                 .with(user(userDetails))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""

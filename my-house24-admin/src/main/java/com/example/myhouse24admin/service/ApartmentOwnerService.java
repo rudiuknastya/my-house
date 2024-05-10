@@ -7,9 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ApartmentOwnerService {
-    void createApartmentOwner(CreateApartmentOwnerRequest createApartmentOwnerRequest, MultipartFile avatar);
+    void createApartmentOwner(CreateApartmentOwnerRequest createApartmentOwnerRequest);
     ApartmentOwnerResponse getApartmentOwnerResponse(Long id);
-    void updateApartmentOwner(EditApartmentOwnerRequest editApartmentOwnerRequest, Long id, MultipartFile multipartFile);
+    void updateApartmentOwner(EditApartmentOwnerRequest editApartmentOwnerRequest, Long id);
     Page<TableApartmentOwnerResponse> getApartmentOwnerResponsesForTable(int page, int pageSize, FilterRequest filterRequest);
     boolean deleteOwnerById(Long id);
     ViewApartmentOwnerResponse getApartmentOwnerResponseForView(Long id);

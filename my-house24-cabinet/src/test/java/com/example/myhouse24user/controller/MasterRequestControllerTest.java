@@ -25,6 +25,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -132,6 +133,7 @@ class MasterRequestControllerTest {
         masterRequestAddRequest.setVisitDate(now);
 
         var request = post("/cabinet/master-requests/add-request")
+                .with(csrf())
                 .with(user(userDetails))
                 .param("masterType", masterRequestAddRequest.getMasterType())
                 .param("description", masterRequestAddRequest.getDescription())
@@ -156,6 +158,7 @@ class MasterRequestControllerTest {
     void deleteMasterRequest() throws Exception {
         // given
         var request = delete("/cabinet/master-requests/delete/%s".formatted(1L))
+                .with(csrf())
                 .with(user(userDetails));
 
         // when

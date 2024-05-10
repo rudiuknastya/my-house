@@ -20,6 +20,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -65,6 +66,7 @@ class AuthenticationControllerTest {
         doReturn(true).when(apartmentOwnerRepo).existsApartmentOwnerByEmail(anyString());
         doNothing().when(mailService).sendToken(anyString(), any(EmailRequest.class), anyString());
         this.mockMvc.perform(post("/cabinet/forgotPassword")
+                        .with(csrf())
                         .flashAttr("emailRequest",new EmailRequest("ruduknasta13@gmail.com")))
                 .andDo(print())
                 .andExpect(status().isOk());

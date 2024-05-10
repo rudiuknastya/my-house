@@ -117,7 +117,6 @@ function logout() {
         error: function () {
         }
     });
-    // window.location = $('#logoutLink').attr('href');
 }
 
 $(window).on('load, ajaxStop', function () {

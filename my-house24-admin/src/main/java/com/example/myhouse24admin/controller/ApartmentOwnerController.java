@@ -62,9 +62,8 @@ public class ApartmentOwnerController {
 
     @PostMapping("/add")
     public @ResponseBody ResponseEntity<?> createOwner(@Valid @ModelAttribute CreateApartmentOwnerRequest createApartmentOwnerRequest,
-                                                       @RequestParam(name = "avatar", required = false) MultipartFile avatar,
                                                        HttpServletRequest request) {
-        apartmentOwnerService.createApartmentOwner(createApartmentOwnerRequest, avatar);
+        apartmentOwnerService.createApartmentOwner(createApartmentOwnerRequest);
         String url = request.getRequestURL().toString();
         int index = url.lastIndexOf("/");
         String returnUrl = url.substring(0, index);
@@ -88,10 +87,8 @@ public class ApartmentOwnerController {
     public @ResponseBody ResponseEntity<?> updateOwner(@PathVariable Long id,
                                                        @Valid @ModelAttribute
                                                        EditApartmentOwnerRequest editApartmentOwnerRequest,
-                                                       @RequestParam(name = "avatar", required = false)
-                                                       MultipartFile avatar,
                                                        HttpServletRequest request) {
-        apartmentOwnerService.updateApartmentOwner(editApartmentOwnerRequest, id, avatar);
+        apartmentOwnerService.updateApartmentOwner(editApartmentOwnerRequest, id);
         String url = request.getRequestURL().toString();
         int index = url.lastIndexOf("/");
         url = url.substring(0, index - 5);
