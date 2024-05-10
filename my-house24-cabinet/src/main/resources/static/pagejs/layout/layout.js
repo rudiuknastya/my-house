@@ -108,6 +108,9 @@ $("#logoutLink").on("click", function (e) {
 });
 
 function logout() {
+    const currentUrl = window.location.href;
+    const myArray = currentUrl.split("/");
+    let root = myArray[3];
     $.ajax({
         type: "POST",
         url: "/" + root + "/cabinet/logout",
