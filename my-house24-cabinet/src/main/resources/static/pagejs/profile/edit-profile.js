@@ -169,7 +169,12 @@ function collectData() {
     });
     var status = $("#status").val() == null? '': $("#status").val();
     formData.append($("#status").attr("id"), status);
-    formData.append('avatar', $('#avatar').prop('files')[0]);
+    let avatar = $('#avatar').prop('files')[0];
+    if(avatar === undefined) {
+        formData.append("avatar", new File([""], "filename"));
+    } else {
+        formData.append("avatar", avatar);
+    }
     formData.append("id",defaultProfile.id);
     return formData;
 }

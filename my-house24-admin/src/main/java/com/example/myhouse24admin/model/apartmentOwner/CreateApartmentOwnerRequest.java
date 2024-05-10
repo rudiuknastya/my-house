@@ -36,7 +36,7 @@ public record CreateApartmentOwnerRequest(
         String aboutOwner,
         @NotBlank(message = "{validation-not-empty}")
         @Size(max = 13, message = "{validation-size-max}")
-        @Pattern(regexp = "\\+?380(50)?(66)?(95)?(99)?(67)?(68)?(96)?(97)?(98)?(63)?(93)?(73)?[0-9]{0,7}", message = "{validation-phone-from-pattern}")
+        @Pattern(regexp = "\\+?380(50)?(66)?(95)?(99)?(67)?(68)?(96)?(97)?(98)?(63)?(93)?(73)?[0-9]{7}", message = "{validation-phone-from-pattern}")
         @OwnerPhoneFieldUnique(message = "{validation-phone-exist}")
         String phoneNumber,
         @Size(max = 13, message = "{validation-size-max}")

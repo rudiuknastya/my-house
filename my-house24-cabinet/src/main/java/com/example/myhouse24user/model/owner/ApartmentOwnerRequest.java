@@ -6,6 +6,7 @@ import com.example.myhouse24user.validators.fileValidation.ImageExtensionValid;
 import com.example.myhouse24user.validators.passwordValidation.PasswordsMatch;
 import com.example.myhouse24user.validators.phoneValidation.PhoneUnique;
 import com.example.myhouse24user.validators.socialsValidation.telegram.TelegramUnique;
+import com.example.myhouse24user.validators.socialsValidation.viber.RegexValid;
 import com.example.myhouse24user.validators.socialsValidation.viber.ViberUnique;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -58,9 +59,10 @@ public record ApartmentOwnerRequest(
         String aboutOwner,
         @NotBlank(message = "{validation-not-empty}")
         @Size(max = 13, message = "{validation-size-max}")
-        @Pattern(regexp = "\\+?380(50)?(66)?(95)?(99)?(67)?(68)?(96)?(97)?(98)?(63)?(93)?(73)?[0-9]{0,7}", message = "{validation-phone-from-pattern}")
+        @Pattern(regexp = "\\+?380(50)?(66)?(95)?(99)?(67)?(68)?(96)?(97)?(98)?(63)?(93)?(73)?[0-9]{7}", message = "{validation-phone-from-pattern}")
         String phoneNumber,
         @Size(max = 13, message = "{validation-size-max}")
+        @RegexValid
         String viberNumber,
         @Size(max = 50, message = "{validation-size-max}")
         String telegramUsername,
