@@ -7,6 +7,7 @@ import com.example.myhouse24admin.validators.passwordValidation.PasswordsMatch;
 import com.example.myhouse24admin.validators.phoneValidation.owners.OwnerPhoneFieldUnique;
 import com.example.myhouse24admin.validators.socialsValidation.telegram.TelegramFieldUnique;
 import com.example.myhouse24admin.validators.socialsValidation.viber.ViberFieldUnique;
+import com.example.myhouse24admin.validators.socialsValidation.viber.ViberRegexValid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -41,6 +42,7 @@ public record CreateApartmentOwnerRequest(
         String phoneNumber,
         @Size(max = 13, message = "{validation-size-max}")
         @ViberFieldUnique(message = "{validation-viber-exist}")
+        @ViberRegexValid
         String viberNumber,
         @Size(max = 50, message = "{validation-size-max}")
         @TelegramFieldUnique(message = "{validation-telegram-exist}")

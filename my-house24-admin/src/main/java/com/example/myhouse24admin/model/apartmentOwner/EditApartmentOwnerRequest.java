@@ -8,6 +8,7 @@ import com.example.myhouse24admin.validators.phoneValidation.owners.EditPhoneFie
 import com.example.myhouse24admin.validators.socialsValidation.telegram.EditTelegramFieldUnique;
 import com.example.myhouse24admin.validators.socialsValidation.telegram.TelegramFieldUnique;
 import com.example.myhouse24admin.validators.socialsValidation.viber.EditViberFieldUnique;
+import com.example.myhouse24admin.validators.socialsValidation.viber.ViberRegexValid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -43,6 +44,7 @@ public record EditApartmentOwnerRequest(
         String phoneNumber,
         @Size(max = 13, message = "{validation-size-max}")
         @EditViberFieldUnique(message = "{validation-viber-exist}")
+        @ViberRegexValid
         String viberNumber,
         @Size(max = 50, message = "{validation-size-max}")
         @EditTelegramFieldUnique(message = "{validation-telegram-exist}")
