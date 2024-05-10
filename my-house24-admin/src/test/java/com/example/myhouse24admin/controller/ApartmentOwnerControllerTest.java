@@ -141,7 +141,7 @@ class ApartmentOwnerControllerTest {
         CreateApartmentOwnerRequest createApartmentOwnerRequest =
                 new CreateApartmentOwnerRequest("name", "name",
                         "name", "12.03.1990", OwnerStatus.NEW,
-                        "about", "+380992403645", "viber",
+                        "about", "+380992403645", "+380992403645",
                         "telegram", "email@gmail.com",
                         "Anastasiia12/","Anastasiia12/", multipartFile);
 
@@ -208,7 +208,7 @@ class ApartmentOwnerControllerTest {
         EditApartmentOwnerRequest editApartmentOwnerRequest =
                 new EditApartmentOwnerRequest("name", "name", "name",
                         "12.03.1990", OwnerStatus.NEW, "about",
-                        "+380992403645", "viber",
+                        "+380992403645", "+380992403645",
                         "telegram", "email@gmail.com",
                         "Anastasiia12/","Anastasiia12/", multipartFile);
 
