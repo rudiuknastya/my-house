@@ -110,7 +110,7 @@ $("#logoutLink").on("click", function (e) {
 function logout() {
     $.ajax({
         type: "POST",
-        url: "/" + root + "/admin/logout",
+        url: "/" + root + "/cabinet/logout",
         headers: {
             "X-CSRF-TOKEN": token
         },
