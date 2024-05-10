@@ -2,6 +2,7 @@ package com.example.myhouse24user.model.owner;
 
 import com.example.myhouse24user.entity.OwnerStatus;
 import com.example.myhouse24user.validators.emailValidation.owner.EmailUnique;
+import com.example.myhouse24user.validators.fileValidation.ImageExtensionValid;
 import com.example.myhouse24user.validators.passwordValidation.PasswordsMatch;
 import com.example.myhouse24user.validators.phoneValidation.PhoneUnique;
 import com.example.myhouse24user.validators.socialsValidation.telegram.TelegramUnique;
@@ -10,6 +11,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
+
 @PasswordsMatch(
         password = "password",
         confirmPassword = "confirmPassword",
@@ -65,6 +68,8 @@ public record ApartmentOwnerRequest(
         @Pattern(regexp = "[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-z]{2,3}(\\.[a-z]{2,3})?", message = "{validation-email-from-pattern}")
         String email,
         String password,
-        String confirmPassword
+        String confirmPassword,
+        @ImageExtensionValid
+        MultipartFile avatar
 ) {
 }

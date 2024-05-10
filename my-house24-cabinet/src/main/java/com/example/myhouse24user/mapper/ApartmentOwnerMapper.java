@@ -64,12 +64,14 @@ public interface ApartmentOwnerMapper {
     @Mapping(ignore = true, target = "password")
     @Mapping(ignore = true, target = "id")
     @Mapping(ignore = true, target = "ownerId")
+    @Mapping(ignore = true, target = "avatar")
     @Mapping(target = "birthDate", expression = "java(convertDateToInstant(apartmentOwnerRequest.birthDate()))")
     void setApartmentOwnerWithoutPassword(@MappingTarget ApartmentOwner apartmentOwner,
                                           ApartmentOwnerRequest apartmentOwnerRequest);
     @Mapping(target = "password", source = "encodedPassword")
     @Mapping(ignore = true, target = "ownerId")
     @Mapping(ignore = true, target = "id")
+    @Mapping(ignore = true, target = "avatar")
     @Mapping(target = "birthDate", expression = "java(convertDateToInstant(apartmentOwnerRequest.birthDate()))")
     void setApartmentOwnerWithPassword(@MappingTarget ApartmentOwner apartmentOwner,
                                        ApartmentOwnerRequest apartmentOwnerRequest,

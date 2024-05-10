@@ -34,6 +34,10 @@ public class ApartmentOwnerDetails implements UserDetails {
         return apartmentOwner.getAvatar();
     }
 
+    public void setApartmentOwner(ApartmentOwner apartmentOwner) {
+        this.apartmentOwner = apartmentOwner;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();

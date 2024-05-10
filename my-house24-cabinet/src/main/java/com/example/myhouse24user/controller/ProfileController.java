@@ -40,10 +40,8 @@ public class ProfileController {
     }
     @PostMapping("/edit")
     public @ResponseBody ResponseEntity<?> updateProfile(@Valid @ModelAttribute ApartmentOwnerRequest apartmentOwnerRequest,
-                                                         @RequestParam(name = "avatar", required = false)
-                                                         MultipartFile avatar,
                                                          HttpServletRequest request) {
-        apartmentOwnerService.updateProfile(apartmentOwnerRequest, avatar);
+        apartmentOwnerService.updateProfile(apartmentOwnerRequest);
         String url = request.getRequestURL().toString();
         int index = url.lastIndexOf("/");
         String returnUrl = url.substring(0, index);

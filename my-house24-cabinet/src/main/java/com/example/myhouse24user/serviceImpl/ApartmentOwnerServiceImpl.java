@@ -6,15 +6,13 @@ import com.example.myhouse24user.entity.OwnerStatus;
 import com.example.myhouse24user.mapper.ApartmentMapper;
 import com.example.myhouse24user.mapper.ApartmentOwnerMapper;
 import com.example.myhouse24user.model.authentication.RegistrationRequest;
-import com.example.myhouse24user.model.owner.ApartmentOwnerRequest;
-import com.example.myhouse24user.model.owner.ApartmentResponse;
-import com.example.myhouse24user.model.owner.EditOwnerResponse;
-import com.example.myhouse24user.model.owner.ViewOwnerResponse;
+import com.example.myhouse24user.model.owner.*;
 import com.example.myhouse24user.repository.ApartmentOwnerRepo;
 import com.example.myhouse24user.repository.ApartmentRepo;
 import com.example.myhouse24user.service.ApartmentOwnerService;
 import com.example.myhouse24user.util.UploadFileUtil;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -81,13 +79,8 @@ public class ApartmentOwnerServiceImpl implements ApartmentOwnerService {
     private String createNewOwnerId() {
         ApartmentOwner apartmentOwner = apartmentOwnerRepo.findLast();
         String ownerId = apartmentOwner.getOwnerId();
-        Integer numberPart = Integer.valueOf(ownerId);
-        numberPart += 1;
-        String newOwnerId = "";
-        for (int i = 0; i < 5 - numberPart.toString().length(); i++) {
-            newOwnerId += "0";
-        }
-        return newOwnerId + numberPart;
+        int numberPart = Integer.parseInt(ownerId);
+        return StringUtils.leftPad(Integer.toString(numberPart + 1), 5, "0");
     }
 
     @Override
@@ -130,7 +123,7 @@ public class ApartmentOwnerServiceImpl implements ApartmentOwnerService {
     }
 
     @Override
-    public void updateProfile(ApartmentOwnerRequest apartmentOwnerRequest, MultipartFile multipartFile) {
+    public void updateProfile(ApartmentOwnerRequest apartmentOwnerRequest) {
         logger.info("updateProfile() - Updating owner profile");
         ApartmentOwner apartmentOwner = apartmentOwnerRepo.findById(apartmentOwnerRequest.id()).orElseThrow(() -> new EntityNotFoundException("Owner not found by id " + apartmentOwnerRequest.id()));
         if (apartmentOwnerRequest.password().isEmpty()) {
@@ -138,14 +131,19 @@ public class ApartmentOwnerServiceImpl implements ApartmentOwnerService {
         } else {
             apartmentOwnerMapper.setApartmentOwnerWithPassword(apartmentOwner, apartmentOwnerRequest, passwordEncoder.encode(apartmentOwnerRequest.password()));
         }
-        updateImage(multipartFile, apartmentOwner);
+        updateImage(apartmentOwnerRequest.avatar(), apartmentOwner);
+        updateOwnerInSecurityContext(apartmentOwner);
         apartmentOwnerRepo.save(apartmentOwner);
         logger.info("updateProfile() - Owner profile was updated");
     }
     private void updateImage(MultipartFile multipartFile, ApartmentOwner apartmentOwner) {
-        if (multipartFile != null) {
+        if (!multipartFile.isEmpty()) {
             String createdImageName = uploadFileUtil.saveMultipartFile(multipartFile);
             apartmentOwner.setAvatar(createdImageName);
         }
+    }
+    private void updateOwnerInSecurityContext(ApartmentOwner apartmentOwner){
+        ApartmentOwnerDetails apartmentOwnerDetails = (ApartmentOwnerDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        apartmentOwnerDetails.setApartmentOwner(apartmentOwner);
     }
 }
