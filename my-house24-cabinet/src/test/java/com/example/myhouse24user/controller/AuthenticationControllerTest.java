@@ -104,6 +104,7 @@ class AuthenticationControllerTest {
         when(ownerPasswordResetTokenService.isPasswordResetTokenValid(anyString())).thenReturn(true);
         doNothing().when(ownerPasswordResetTokenService).updatePassword(anyString(), anyString());
         this.mockMvc.perform(post("/cabinet/changePassword")
+                        .with(csrf())
                         .param("token","token")
                         .flashAttr("forgotPasswordRequest",
                                 new ForgotPasswordRequest("Anastasiia12/","Anastasiia12/")))
@@ -125,8 +126,8 @@ class AuthenticationControllerTest {
     void getSuccessPage() throws Exception {
         this.mockMvc.perform(get("/cabinet/success"))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("security/success"));
+                .andExpect(status().isFound())
+                .andExpect(view().name("redirect:statistic"));
     }
 
     @Test
@@ -150,6 +151,7 @@ class AuthenticationControllerTest {
         when(recaptchaService.isRecaptchaValid(anyString())).thenReturn(true);
         doNothing().when(apartmentOwnerService).register(any(RegistrationRequest.class));
         this.mockMvc.perform(post("/cabinet/register")
+                        .with(csrf())
                         .param("recaptcha","recaptcha")
                         .flashAttr("registrationRequest",
                                 new RegistrationRequest("name","name",
@@ -163,6 +165,7 @@ class AuthenticationControllerTest {
     void registerOwner_Recaptcha_Should_Not_Be_valid() throws Exception {
         when(recaptchaService.isRecaptchaValid(anyString())).thenReturn(false);
         this.mockMvc.perform(post("/cabinet/register")
+                        .with(csrf())
                         .param("recaptcha","recaptcha")
                         .flashAttr("registrationRequest",
                                 new RegistrationRequest("name","name",

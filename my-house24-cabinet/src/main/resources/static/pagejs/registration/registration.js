@@ -22,6 +22,7 @@ function collectData() {
     return formData
 }
 function sendData(formData) {
+    let csrfToken = $("meta[name='_csrf']").attr("content");
     $.ajax({
         type: "POST",
         url: window.location.href,
@@ -30,6 +31,9 @@ function sendData(formData) {
         processData: false,
         success: function (response) {
             window.location.href = response;
+        },
+        headers: {
+            "X-CSRF-TOKEN": csrfToken
         },
         error: function (error) {
             printErrorMessageToField(error);

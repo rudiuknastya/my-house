@@ -108,5 +108,16 @@ $("#logoutLink").on("click", function (e) {
 });
 
 function logout() {
-    window.location = $('#logoutLink').attr('href');
+    $.ajax({
+        type: "POST",
+        url: "/" + root + "/admin/logout",
+        headers: {
+            "X-CSRF-TOKEN": token
+        },
+        success: function () {
+            window.location.href = 'login?logout';
+        },
+        error: function () {
+        }
+    });
 }
