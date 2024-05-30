@@ -18,7 +18,6 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Locale;
 
 @Configuration
-@EnableWebMvc
 public class MvcConfiguration implements WebMvcConfigurer {
 
     private final S3ResourceResolve s3ResourceResolve;
