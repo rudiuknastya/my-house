@@ -126,8 +126,8 @@ class AuthenticationControllerTest {
     void getSuccessPage() throws Exception {
         this.mockMvc.perform(get("/success"))
                 .andDo(print())
-                .andExpectAll(status().is3xxRedirection(),
-                        redirectedUrl("statistic"));
+                .andExpect(status().isOk())
+                .andExpect(view().name("security/success"));
     }
 
     @Test
