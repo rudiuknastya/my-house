@@ -43,7 +43,7 @@ class PermissionControllerTest {
                 .thenReturn(List.of(permissionResponse));
 
         this.mockMvc.perform(get("/my-house/admin/getPermissions")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("role", "ADMIN"))
                 .andDo(print())

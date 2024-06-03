@@ -25,8 +25,8 @@ class ExceptionControllerTest {
     private UserDetails userDetails;
     @Test
     void getAccessDenied() throws Exception {
-        this.mockMvc.perform(get("/my-house/access-denied")
-                        .contextPath("/my-house")
+        this.mockMvc.perform(get("/my-house/admin/access-denied")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())

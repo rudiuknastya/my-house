@@ -56,7 +56,7 @@ class PersonalAccountControllerTest {
     void viewPersonalAccounts() throws Exception {
         // given
         var request = get("/my-house/admin/personal-accounts")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -74,7 +74,7 @@ class PersonalAccountControllerTest {
     void viewAddPersonalAccount() throws Exception {
         // given
         var request = get("/my-house/admin/personal-accounts/add")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -92,7 +92,7 @@ class PersonalAccountControllerTest {
     void viewEditPersonalAccount() throws Exception {
         // given
         var request = get("/my-house/admin/personal-accounts/edit-account/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -110,7 +110,7 @@ class PersonalAccountControllerTest {
     void viewViewPersonalAccount() throws Exception {
         // given
         var request = get("/my-house/admin/personal-accounts/view-account/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -134,7 +134,7 @@ class PersonalAccountControllerTest {
         List<PersonalAccountShortResponse> personalAccountShortResponses =
                 List.of(personalAccountShortResponse, personalAccountShortResponse, personalAccountShortResponse);
 
-        var request = get("/admin/personal-accounts/get-free-accounts-find-number")
+        var request = get("/personal-accounts/get-free-accounts-find-number")
                 .with(user(userDetails))
                 .param("page", "0")
                 .param("pageSize", "10")
@@ -169,7 +169,7 @@ class PersonalAccountControllerTest {
                 List.of(personalAccountTableResponse, personalAccountTableResponse, personalAccountTableResponse);
         Map<String, String> searchParam = Map.of("accountNumber", "1");
 
-        var request = get("/admin/personal-accounts/get-personal-accounts")
+        var request = get("/personal-accounts/get-personal-accounts")
                 .with(user(userDetails))
                 .param("page", "0")
                 .param("pageSize", "10")
@@ -196,7 +196,7 @@ class PersonalAccountControllerTest {
         // given
         var personalAccountStatuses = Arrays.asList(PersonalAccountStatus.values());
 
-        var request = get("/admin/personal-accounts/get-statuses")
+        var request = get("/personal-accounts/get-statuses")
                 .with(user(userDetails));
 
         // when
@@ -223,7 +223,7 @@ class PersonalAccountControllerTest {
         personalAccountAddRequest.setStatus(PersonalAccountStatus.ACTIVE);
         personalAccountAddRequest.setApartmentId(1L);
 
-        var request = post("/admin/personal-accounts/add")
+        var request = post("/personal-accounts/add")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", personalAccountAddRequest);
@@ -250,7 +250,7 @@ class PersonalAccountControllerTest {
         // given
         var personalAccountAddRequest = new PersonalAccountAddRequest();
 
-        var request = post("/admin/personal-accounts/add")
+        var request = post("/personal-accounts/add")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", personalAccountAddRequest);
@@ -280,7 +280,7 @@ class PersonalAccountControllerTest {
         apartment.setApartmentNumber("00001");
         personalAccountResponse.setApartment(apartment);
 
-        var request = get("/admin/personal-accounts/get-account/1")
+        var request = get("/personal-accounts/get-account/1")
                 .with(user(userDetails));
 
         // when
@@ -319,7 +319,7 @@ class PersonalAccountControllerTest {
         personalAccountUpdateRequest.setStatus(PersonalAccountStatus.ACTIVE);
         personalAccountUpdateRequest.setApartmentId(1L);
 
-        var request = post("/admin/personal-accounts/edit-account/1")
+        var request = post("/personal-accounts/edit-account/1")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", personalAccountUpdateRequest);
@@ -351,7 +351,7 @@ class PersonalAccountControllerTest {
         personalAccountUpdateRequest.setStatus(PersonalAccountStatus.ACTIVE);
         personalAccountUpdateRequest.setApartmentId(1L);
 
-        var request = post("/admin/personal-accounts/edit-account/1")
+        var request = post("/personal-accounts/edit-account/1")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", personalAccountUpdateRequest);
@@ -371,7 +371,7 @@ class PersonalAccountControllerTest {
     @Test
     void getMinimalFreeAccountNumber() throws Exception {
         // given
-        var request = get("/admin/personal-accounts/get-minimal-free-account-number")
+        var request = get("/personal-accounts/get-minimal-free-account-number")
                 .with(user(userDetails));
 
         // when
@@ -411,7 +411,7 @@ class PersonalAccountControllerTest {
         apartment.setSection(section);
         apartment.setOwner(new ApartmentOwnerShortResponse(1L, "Test Full Name", "+380123456789"));
         personalAccountTableResponse.setApartment(apartment);
-        var request = get("/admin/personal-accounts/export-to-excel")
+        var request = get("/personal-accounts/export-to-excel")
                 .with(user(userDetails))
                 .requestAttr("searchParams", searchParams)
                 .param("page", "0")

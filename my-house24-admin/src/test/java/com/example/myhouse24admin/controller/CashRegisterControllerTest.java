@@ -57,7 +57,7 @@ class CashRegisterControllerTest {
     void viewCashRegisterTable() throws Exception {
         // given
         var request = get("/my-house/admin/cash-register")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -75,7 +75,7 @@ class CashRegisterControllerTest {
     void viewAddIncomeSheet() throws Exception {
         // given
         var request = get("/my-house/admin/cash-register/add-income-sheet")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -93,7 +93,7 @@ class CashRegisterControllerTest {
     void viewEditIncomeSheet() throws Exception {
         // given
         var request = get("/my-house/admin/cash-register/edit-income-sheet/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -111,7 +111,7 @@ class CashRegisterControllerTest {
     void viewAddExpenseSheet() throws Exception {
         // given
         var request = get("/my-house/admin/cash-register/add-expense-sheet")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -129,7 +129,7 @@ class CashRegisterControllerTest {
     void viewEditExpenseSheet() throws Exception {
         // given
         var request = get("/my-house/admin/cash-register/edit-expense-sheet/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -147,7 +147,7 @@ class CashRegisterControllerTest {
     void viewSheet() throws Exception {
         // given
         var request = get("/my-house/admin/cash-register/view-sheet/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -171,7 +171,8 @@ class CashRegisterControllerTest {
         cashSheetTableResponse.setSheetType(CashSheetType.INCOME);
         cashSheetTableResponse.setSheetNumber("00000-00001");
 
-        var request = get("/admin/cash-register/get-sheets")
+        var request = get("/my-house/admin/cash-register/get-sheets")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails))
                 .param("page", String.valueOf(pageable.getPageNumber()))
                 .param("pageSize", String.valueOf(pageable.getPageSize()));
@@ -213,7 +214,8 @@ class CashRegisterControllerTest {
         addRequest.setComment("testComment");
 
 
-        var request = post("/admin/cash-register/add-income-sheet")
+        var request = post("/my-house/admin/cash-register/add-income-sheet")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("addRequest", addRequest);
@@ -235,7 +237,7 @@ class CashRegisterControllerTest {
     @Test
     void getNextSheetNumber() throws Exception {
         // given
-        var request = get("/admin/cash-register/get-next-sheet-number")
+        var request = get("/cash-register/get-next-sheet-number")
                 .with(user(userDetails));
 
         // when
@@ -260,7 +262,7 @@ class CashRegisterControllerTest {
         sheetResponse.setSheetType(CashSheetType.INCOME);
         sheetResponse.setSheetNumber("00000-00001");
 
-        var request = get("/admin/cash-register/get-sheet/1")
+        var request = get("/cash-register/get-sheet/1")
                 .with(user(userDetails));
 
         // when
@@ -294,7 +296,7 @@ class CashRegisterControllerTest {
         updateRequest.setStaffId(1L);
         updateRequest.setComment("testComment");
 
-        var request = post("/admin/cash-register/edit-income-sheet/1")
+        var request = post("/cash-register/edit-income-sheet/1")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("updateRequest", updateRequest);
@@ -324,7 +326,7 @@ class CashRegisterControllerTest {
         addRequest.setStaffId(1L);
         addRequest.setComment("testComment");
 
-        var request = post("/admin/cash-register/add-expense-sheet")
+        var request = post("/cash-register/add-expense-sheet")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("addRequest", addRequest);
@@ -355,7 +357,7 @@ class CashRegisterControllerTest {
         updateRequest.setStaffId(1L);
         updateRequest.setComment("testComment");
 
-        var request = post("/admin/cash-register/edit-expense-sheet/1")
+        var request = post("/cash-register/edit-expense-sheet/1")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("updateRequest", updateRequest);
@@ -396,7 +398,7 @@ class CashRegisterControllerTest {
         sheetResponse.setProcessed(true);
         sheetResponse.setComment("testComment");
 
-        var request = get("/admin/cash-register/export-view-to-exel/1")
+        var request = get("/cash-register/export-view-to-exel/1")
                 .with(user(userDetails));
 
         // when
@@ -437,7 +439,7 @@ class CashRegisterControllerTest {
         tableResponse.setAmount(BigDecimal.valueOf(100.0));
         tableResponse.setPersonalAccount(personalAccount);
 
-        var request = get("/admin/cash-register/export-table-to-exel")
+        var request = get("/cash-register/export-table-to-exel")
                 .with(user(userDetails))
                 .requestAttr("searchParams", searchParams)
                 .param("page", "0")
@@ -465,7 +467,7 @@ class CashRegisterControllerTest {
     @Test
     void deleteCashSheet_WhenSuccessDelete() throws Exception {
         // given
-        var request = delete("/admin/cash-register/delete-sheet/1")
+        var request = delete("/cash-register/delete-sheet/1")
                 .with(csrf())
                 .with(user(userDetails));
 
@@ -484,7 +486,7 @@ class CashRegisterControllerTest {
     @Test
     void deleteCashSheet_WhenDeleteIsFail() throws Exception {
         // given
-        var request = delete("/admin/cash-register/delete-sheet/1")
+        var request = delete("/cash-register/delete-sheet/1")
                 .with(csrf())
                 .with(user(userDetails));
 

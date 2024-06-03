@@ -100,7 +100,7 @@ class InvoiceControllerTest {
     @Test
     void getInvoicesPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/invoices")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -117,7 +117,7 @@ class InvoiceControllerTest {
                 .thenReturn(new PageImpl<>(List.of(tableInvoiceResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("requestMap", String.valueOf(new HashMap<>())))
                 .andDo(print())
@@ -131,7 +131,7 @@ class InvoiceControllerTest {
     @Test
     void getInvoicePage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/invoices/add")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -143,7 +143,7 @@ class InvoiceControllerTest {
         doNothing().when(invoiceService).createInvoice(any(InvoiceRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/invoices/add")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", invoiceRequest))
@@ -156,7 +156,7 @@ class InvoiceControllerTest {
         doNothing().when(invoiceService).createInvoice(any(InvoiceRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/invoices/add")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", new InvoiceRequest()))
@@ -168,7 +168,7 @@ class InvoiceControllerTest {
     @Test
     void getStatuses() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/invoices/get-statuses")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -184,7 +184,7 @@ class InvoiceControllerTest {
                 .thenReturn(new PageImpl<>(List.of(houseNameResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-houses")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("search", "search")
                         .param("page", "1"))
@@ -203,7 +203,7 @@ class InvoiceControllerTest {
                 .thenReturn(new PageImpl<>(List.of(sectionNameResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-sections")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("search", "search")
                         .param("page", "1"))
@@ -223,7 +223,7 @@ class InvoiceControllerTest {
 
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-apartments")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("search", "search")
                         .param("page", "1")
@@ -244,7 +244,7 @@ class InvoiceControllerTest {
                 .thenReturn(new PageImpl<>(List.of(serviceNameResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-services")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("search", "search")
                         .param("page", "1"))
@@ -261,7 +261,7 @@ class InvoiceControllerTest {
         when(invoiceService.createNumber()).thenReturn("000001");
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-number")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -274,7 +274,7 @@ class InvoiceControllerTest {
         when(invoiceService.getOwnerResponse(anyLong())).thenReturn(ownerResponse);
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-owner")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("apartmentId", "1"))
                 .andDo(print())
@@ -296,7 +296,7 @@ class InvoiceControllerTest {
                 .thenReturn(new PageImpl<>(List.of(apartmentMeterReadingResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-meter-readings")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("page", "0")
                         .param("pageSize", "1")
@@ -317,7 +317,7 @@ class InvoiceControllerTest {
         when(tariffService.getTariffItems(anyLong())).thenReturn(List.of(tariffItemResponse));
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-tariff-items")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("tariffId", "1"))
                 .andDo(print())
@@ -333,7 +333,7 @@ class InvoiceControllerTest {
         when(servicesService.getUnitOfMeasurementNameByServiceId(anyLong())).thenReturn(unitNameResponse);
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-unit-name")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("serviceId", "1"))
                 .andDo(print())
@@ -347,7 +347,7 @@ class InvoiceControllerTest {
                 .thenReturn(List.of(BigDecimal.valueOf(23), BigDecimal.valueOf(12)));
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-amounts")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("serviceIds[]", "1")
                         .param("apartmentId", "1"))
@@ -365,7 +365,7 @@ class InvoiceControllerTest {
                 .thenReturn(new PageImpl<>(List.of(ownerNameResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-owners")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("search", "search")
                         .param("page", "1"))
@@ -380,7 +380,7 @@ class InvoiceControllerTest {
     @Test
     void getEditInvoicePage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/invoices/edit/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -396,7 +396,7 @@ class InvoiceControllerTest {
         when(invoiceService.getInvoiceResponse(anyLong())).thenReturn(invoiceResponse);
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-invoice/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -409,7 +409,7 @@ class InvoiceControllerTest {
         doNothing().when(invoiceService).updateInvoice(anyLong(), any(InvoiceRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/invoices/edit/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", invoiceRequest))
@@ -422,7 +422,7 @@ class InvoiceControllerTest {
         doNothing().when(invoiceService).updateInvoice(anyLong(), any(InvoiceRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/invoices/edit/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", new InvoiceRequest()))
@@ -434,7 +434,7 @@ class InvoiceControllerTest {
     @Test
     void getViewInvoicePage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/invoices/view-invoice/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -450,7 +450,7 @@ class InvoiceControllerTest {
         when(invoiceService.getInvoiceResponseForView(anyLong())).thenReturn(viewInvoiceResponse);
 
         this.mockMvc.perform(get("/my-house/admin/invoices/view-invoice/get/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -463,7 +463,7 @@ class InvoiceControllerTest {
         when(invoiceService.deleteInvoice(anyLong())).thenReturn(true);
 
         this.mockMvc.perform(get("/my-house/admin/invoices/delete/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -473,7 +473,7 @@ class InvoiceControllerTest {
         when(invoiceService.deleteInvoice(anyLong())).thenReturn(false);
 
         this.mockMvc.perform(get("/my-house/admin/invoices/delete/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isConflict());
@@ -484,7 +484,7 @@ class InvoiceControllerTest {
         when(invoiceService.deleteInvoices(any())).thenReturn(true);
 
         this.mockMvc.perform(get("/my-house/admin/invoices/delete-invoices")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("invoiceIds[]","1"))
                 .andDo(print())
@@ -495,7 +495,7 @@ class InvoiceControllerTest {
         when(invoiceService.deleteInvoices(any())).thenReturn(false);
 
         this.mockMvc.perform(get("/my-house/admin/invoices/delete-invoices")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("invoiceIds[]","1"))
                 .andDo(print())
@@ -505,7 +505,7 @@ class InvoiceControllerTest {
     @Test
     void getInvoicePageForCopy() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/invoices/copy/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -517,7 +517,7 @@ class InvoiceControllerTest {
         doNothing().when(invoiceService).createInvoice(any(InvoiceRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/invoices/copy/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", invoiceRequest))
@@ -529,7 +529,7 @@ class InvoiceControllerTest {
     void saveCopiedInvoice_InvoiceRequest_Not_Valid() throws Exception {
         doNothing().when(invoiceService).createInvoice(any(InvoiceRequest.class));
         this.mockMvc.perform(post("/my-house/admin/invoices/add")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceRequest", new InvoiceRequest()))
@@ -541,7 +541,7 @@ class InvoiceControllerTest {
     @Test
     void getPrintTemplatePage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/invoices/view-invoice/print/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -554,7 +554,7 @@ class InvoiceControllerTest {
         when(invoiceService.createPdfFile(anyLong(), anyString())).thenReturn(new byte[]{0x01});
 
         this.mockMvc.perform(get("/my-house/admin/invoices/view-invoice/print/download/{id}/{template}", 1, "template")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -567,7 +567,7 @@ class InvoiceControllerTest {
         when(invoiceService.getInvoiceNumber(anyLong())).thenReturn("000001");
 
         this.mockMvc.perform(get("/my-house/admin/invoices/get-number/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -581,7 +581,7 @@ class InvoiceControllerTest {
         doNothing().when(mailService).sendInvoice(anyString(), any());
 
         this.mockMvc.perform(post("/my-house/admin/invoices/view-invoice/send-invoice/{id}/{template}", 1, "template")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails)))
                 .andDo(print())

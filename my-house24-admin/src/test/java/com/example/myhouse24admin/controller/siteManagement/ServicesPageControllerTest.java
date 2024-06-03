@@ -49,7 +49,7 @@ class ServicesPageControllerTest {
     @Test
     void getServicesPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/site-management/service-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -67,7 +67,7 @@ class ServicesPageControllerTest {
         when(servicesPageService.getServicesPageResponse()).thenReturn(servicesPageResponse);
 
         this.mockMvc.perform(get("/my-house/admin/site-management/service-page/get")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -93,7 +93,7 @@ class ServicesPageControllerTest {
         doNothing().when(servicesPageService).updateServicesPage(any(ServicePageRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/site-management/service-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("servicePageRequest", servicePageRequest))
@@ -112,7 +112,7 @@ class ServicesPageControllerTest {
         servicePageRequest.setServicePageBlocks(List.of(servicePageBlockRequest));
 
         this.mockMvc.perform(post("/my-house/admin/site-management/service-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("servicePageRequest", servicePageRequest))

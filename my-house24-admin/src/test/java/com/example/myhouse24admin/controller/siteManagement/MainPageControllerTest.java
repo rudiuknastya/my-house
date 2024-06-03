@@ -56,7 +56,7 @@ class MainPageControllerTest {
     @Test
     void getMainPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/site-management/home-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -73,7 +73,7 @@ class MainPageControllerTest {
         when(mainPageService.getMainPageResponse()).thenReturn(mainPageResponse);
 
         this.mockMvc.perform(get("/my-house/admin/site-management/home-page/get")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -119,7 +119,7 @@ class MainPageControllerTest {
         doReturn(Optional.of(mainPage)).when(mainPageRepo).findById(anyLong());
 
         this.mockMvc.perform(post("/my-house/admin/site-management/home-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("mainPageRequest", mainPageRequest))
@@ -144,7 +144,7 @@ class MainPageControllerTest {
         doReturn(Optional.of(new MainPage())).when(mainPageRepo).findById(anyLong());
 
         this.mockMvc.perform(post("/my-house/admin/site-management/home-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("mainPageRequest", mainPageRequest))

@@ -95,6 +95,6 @@ public class TariffController {
     public RedirectView copyTariffById(@PathVariable Long tariffId, RedirectAttributes attributes) {
         TariffResponse tariffById = tariffService.getTariffById(tariffId);
         attributes.addFlashAttribute("copyTariff", tariffById);
-        return new RedirectView("/admin/system-settings/tariffs/add", true);
+        return new RedirectView("/system-settings/tariffs/add", true);
     }
 }

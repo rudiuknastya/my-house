@@ -40,7 +40,7 @@ class RoleControllerTest {
     @Test
     void getRolesPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/system-settings/roles")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -55,7 +55,7 @@ class RoleControllerTest {
         when(roleService.createRoleResponse()).thenReturn(roleResponse);
 
         this.mockMvc.perform(get("/my-house/admin/system-settings/roles/getRoles")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -71,7 +71,7 @@ class RoleControllerTest {
         doNothing().when(roleService).updatePermissions(any(), any(), any(), any());
 
         this.mockMvc.perform(post("/my-house/admin/system-settings/roles/update")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .param("managerPermissions[]","true")

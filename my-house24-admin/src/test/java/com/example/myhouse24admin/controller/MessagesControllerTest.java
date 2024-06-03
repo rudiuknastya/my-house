@@ -48,7 +48,7 @@ class MessagesControllerTest {
     void viewMessagesTable() throws Exception {
         // given
         var request = get("/my-house/admin/messages")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -66,7 +66,7 @@ class MessagesControllerTest {
     void viewNewMessages() throws Exception {
         // given
         var request = get("/my-house/admin/messages/new-message")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -84,7 +84,7 @@ class MessagesControllerTest {
     void testViewNewMessages() throws Exception {
         // given
         var request = get("/my-house/admin/messages/view-message/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -106,7 +106,7 @@ class MessagesControllerTest {
         messageSendRequest.setText("text");
         messageSendRequest.setTextLength(3L);
 
-        var request = post("/admin/messages/new-message")
+        var request = post("/messages/new-message")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("messageSendRequest", messageSendRequest);
@@ -133,7 +133,7 @@ class MessagesControllerTest {
         messageTableResponse.setText("text");
         messageTableResponse.setSubject("subject");
 
-        var request = get("/admin/messages/get-messages")
+        var request = get("/messages/get-messages")
                 .with(user(userDetails))
                 .param("page", String.valueOf(pageable.getPageNumber()))
                 .param("pageSize", String.valueOf(pageable.getPageSize()));
@@ -182,7 +182,7 @@ class MessagesControllerTest {
         messageResponse.setText("text");
         messageResponse.setSubject("subject");
 
-        var request = get("/admin/messages/get-message/1")
+        var request = get("/messages/get-message/1")
                 .with(user(userDetails));
 
         // when
@@ -210,7 +210,7 @@ class MessagesControllerTest {
     @Test
     void deleteMessages() throws Exception {
         // given
-        var request = delete("/admin/messages/delete-messages")
+        var request = delete("/messages/delete-messages")
                 .with(csrf())
                 .with(user(userDetails))
                 .param("messagesToDelete", "1,2,3");
@@ -229,7 +229,7 @@ class MessagesControllerTest {
     @Test
     void deleteMessages_WhenThrowsException() throws Exception {
         // given
-        var request = delete("/admin/messages/delete-messages")
+        var request = delete("/messages/delete-messages")
                 .with(csrf())
                 .with(user(userDetails))
                 .param("messagesToDelete", "1,2,3");

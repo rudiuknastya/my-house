@@ -48,7 +48,8 @@ class PaymentDetailsControllerTest {
     @Test
     void viewPaymentDetails() throws Exception {
         // given
-        var request = get("/admin/system-settings/payment-details")
+        var request = get("/my-house/admin/system-settings/payment-details")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -65,7 +66,8 @@ class PaymentDetailsControllerTest {
     @Test
     void getPaymentDetails() throws Exception {
         // given
-        var request = get("/admin/system-settings/payment-details/get-details")
+        var request = get("/my-house/admin/system-settings/payment-details/get-details")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -90,7 +92,8 @@ class PaymentDetailsControllerTest {
     @Test
     void updatePaymentDetails() throws Exception {
         // given
-        var request = post("/admin/system-settings/payment-details/update-details")
+        var request = post("/my-house/admin/system-settings/payment-details/update-details")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("paymentDetailsDto", paymentDetailsDto);

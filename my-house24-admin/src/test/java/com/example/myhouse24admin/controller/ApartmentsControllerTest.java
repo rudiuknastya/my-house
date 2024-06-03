@@ -55,7 +55,7 @@ class ApartmentsControllerTest {
     void viewApartmentsTable() throws Exception {
         // given
         var request = get("/my-house/admin/apartments")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -73,7 +73,7 @@ class ApartmentsControllerTest {
     void viewAddApartment() throws Exception {
         // given
         var request = get("/my-house/admin/apartments/add")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -91,7 +91,7 @@ class ApartmentsControllerTest {
     void viewEditApartment() throws Exception {
         // given
         var request = get("/my-house/admin/apartments/edit-apartment/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -109,7 +109,7 @@ class ApartmentsControllerTest {
     void viewApartment() throws Exception {
         // given
         var request = get("/my-house/admin/apartments/view-apartment/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -137,7 +137,8 @@ class ApartmentsControllerTest {
         addRequest.setPersonalAccountId(1L);
 
 
-        var request = post("/admin/apartments/add")
+        var request = post("/my-house/admin/apartments/add")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("apartmentAddRequest", addRequest);
@@ -167,7 +168,8 @@ class ApartmentsControllerTest {
         apartmentResponse.setBalance(BigDecimal.valueOf(100.0));
         apartmentResponse.setApartmentNumber("00001");
 
-        var request = get("/admin/apartments/get-apartments")
+        var request = get("/my-house/admin/apartments/get-apartments")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails))
                 .param("page", String.valueOf(pageable.getPageNumber()))
                 .param("pageSize", String.valueOf(pageable.getPageSize()));
@@ -202,7 +204,8 @@ class ApartmentsControllerTest {
         apartmentResponse.setApartmentNumber("00001");
         apartmentResponse.setArea(100.0);
 
-        var request = get("/admin/apartments/get-apartment/1")
+        var request = get("/my-house/admin/apartments/get-apartment/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -225,7 +228,8 @@ class ApartmentsControllerTest {
     @Test
     void getApartmentById_WhenApartmentByIdNotFound() throws Exception {
         // given
-        var request = get("/admin/apartments/get-apartment/1")
+        var request = get("/my-house/admin/apartments/get-apartment/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -255,7 +259,8 @@ class ApartmentsControllerTest {
         addRequest.setPersonalAccountId(1L);
 
 
-        var request = post("/admin/apartments/edit-apartment/1")
+        var request = post("/my-house/admin/apartments/edit-apartment/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("apartmentAddRequest", addRequest);
@@ -279,7 +284,8 @@ class ApartmentsControllerTest {
     @Test
     void deleteApartment() throws Exception {
         // given
-        var request = delete("/admin/apartments/delete-apartment/1")
+        var request = delete("/my-house/admin/apartments/delete-apartment/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails));
 

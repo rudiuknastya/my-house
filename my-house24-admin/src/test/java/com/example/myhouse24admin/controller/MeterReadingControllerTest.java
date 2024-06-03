@@ -66,7 +66,7 @@ class MeterReadingControllerTest {
     @Test
     void getMeterReadingsPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/meter-readings")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -84,7 +84,7 @@ class MeterReadingControllerTest {
                 .thenReturn(new PageImpl<>(List.of(tableMeterReadingResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/meter-readings/get")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("requestMap", String.valueOf(new HashMap<>())))
                 .andDo(print())
@@ -98,7 +98,7 @@ class MeterReadingControllerTest {
     @Test
     void getMeterReadingPageForCreate() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/meter-readings/add")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -113,7 +113,7 @@ class MeterReadingControllerTest {
     @Test
     void getStatuses() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/meter-readings/get-statuses")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -130,7 +130,7 @@ class MeterReadingControllerTest {
                 .thenReturn(new PageImpl<>(List.of(houseNameResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/meter-readings/get-houses")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("search", "search")
                         .param("page", "1"))
@@ -149,7 +149,7 @@ class MeterReadingControllerTest {
                 .thenReturn(new PageImpl<>(List.of(sectionNameResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/meter-readings/get-sections")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("requestMap", String.valueOf(new HashMap<>()))
                         .param("page", "1"))
@@ -169,7 +169,7 @@ class MeterReadingControllerTest {
 
 
         this.mockMvc.perform(get("/my-house/admin/meter-readings/get-apartments")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("search", "search")
                         .param("page", "1")
@@ -190,7 +190,7 @@ class MeterReadingControllerTest {
                 .thenReturn(new PageImpl<>(List.of(serviceNameResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/meter-readings/get-services")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("search", "search")
                         .param("page", "1"))
@@ -208,7 +208,7 @@ class MeterReadingControllerTest {
         doNothing().when(meterReadingService).createMeterReading(any(MeterReadingRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/add")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "true")
@@ -224,7 +224,7 @@ class MeterReadingControllerTest {
                         null, null, null, null);
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/add")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "true")
@@ -237,7 +237,7 @@ class MeterReadingControllerTest {
     @Test
     void getMeterReadingPageForEdit() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/meter-readings/edit/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -262,7 +262,7 @@ class MeterReadingControllerTest {
                 .thenReturn(meterReadingResponse);
 
         this.mockMvc.perform(get("/my-house/admin/meter-readings/get-reading/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -277,7 +277,7 @@ class MeterReadingControllerTest {
         doNothing().when(meterReadingService).updateMeterReading(anyLong(),any(MeterReadingRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/edit/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "true")
@@ -294,7 +294,7 @@ class MeterReadingControllerTest {
                         null, null, null, null);
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/edit/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "true")
@@ -308,7 +308,7 @@ class MeterReadingControllerTest {
         when(meterReadingService.createNumber()).thenReturn("000001");
 
         this.mockMvc.perform(get("/my-house/admin/meter-readings/get-number")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -318,7 +318,7 @@ class MeterReadingControllerTest {
     @Test
     void getApartmentReadingsPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/meter-readings/apartment/{apartmentId}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -337,7 +337,7 @@ class MeterReadingControllerTest {
                 .thenReturn(new PageImpl<>(List.of(apartmentMeterReadingResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/meter-readings/get-by-apartment/{apartmentId}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("requestMap", String.valueOf(new HashMap<>())))
                 .andDo(print())
@@ -353,7 +353,7 @@ class MeterReadingControllerTest {
         doNothing().when(meterReadingService).deleteMeterReading(anyLong());
 
         this.mockMvc.perform(get("/my-house/admin/meter-readings/delete/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -361,7 +361,7 @@ class MeterReadingControllerTest {
     @Test
     void getMeterReadingPageForCreateWithApartment() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/meter-readings/add/{id}", 1L)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -378,7 +378,7 @@ class MeterReadingControllerTest {
                 .thenReturn(readingsApartmentResponse);
 
         this.mockMvc.perform(get("/my-house/admin/meter-readings/get-apartment/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -390,7 +390,7 @@ class MeterReadingControllerTest {
         doNothing().when(meterReadingService).createMeterReading(any(MeterReadingRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/add/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "true")
@@ -404,7 +404,7 @@ class MeterReadingControllerTest {
         doNothing().when(meterReadingService).createMeterReading(any(MeterReadingRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/meter-readings/add/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .param("notReturn", "false")

@@ -41,7 +41,7 @@ class SectionsControllerTest {
         sectionResponse.setId(1L);
         sectionResponse.setName("Section 1");
         sectionResponse.setRangeApartmentNumbers("001-100");
-        var request = get("/admin/sections/get-sections-by-house/1")
+        var request = get("/sections/get-sections-by-house/1")
                 .with(user(userDetails))
                 .param("page", "0")
                 .param("pageSize", "10")

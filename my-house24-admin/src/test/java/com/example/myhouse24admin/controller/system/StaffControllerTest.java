@@ -64,7 +64,8 @@ class StaffControllerTest {
     @Test
     void viewAddStaff() throws Exception {
         // given
-        var request = get("/admin/system-settings/staff/add")
+        var request = get("/my-house/admin/system-settings/staff/add")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -79,7 +80,8 @@ class StaffControllerTest {
     @Test
     void viewStaff() throws Exception {
         // given
-        var request = get("/admin/system-settings/staff")
+        var request = get("/my-house/admin/system-settings/staff")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -94,7 +96,8 @@ class StaffControllerTest {
     @Test
     void viewEditStaff() throws Exception {
         // given
-        var request = get("/admin/system-settings/staff/edit-staff/1")
+        var request = get("/my-house/admin/system-settings/staff/edit-staff/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -109,7 +112,8 @@ class StaffControllerTest {
     @Test
     void testViewStaff() throws Exception {
         // given
-        var request = get("/admin/system-settings/staff/view-staff/1")
+        var request = get("/my-house/admin/system-settings/staff/view-staff/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -135,7 +139,8 @@ class StaffControllerTest {
                 staff.getRole().getId(),
                 staff.getStatus()
         );
-        var request = post("/admin/system-settings/staff/add")
+        var request = post("/my-house/admin/system-settings/staff/add")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("staffEditRequest", staffEditRequest);
@@ -155,7 +160,8 @@ class StaffControllerTest {
     void getStaffRoles() throws Exception {
         // given
         var staffRoles = List.of(staff.getRole());
-        var request = get("/admin/system-settings/staff/get-roles")
+        var request = get("/my-house/admin/system-settings/staff/get-roles")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -181,7 +187,8 @@ class StaffControllerTest {
     void getStaffStatuses() throws Exception {
         // given
         var staffStatuses = Arrays.stream(StaffStatus.values()).map(Enum::name).toList();
-        var request = get("/admin/system-settings/staff/get-statuses")
+        var request = get("/my-house/admin/system-settings/staff/get-statuses")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -210,7 +217,8 @@ class StaffControllerTest {
                 staff.getRole(),
                 staff.getStatus()
         );
-        var request = get("/admin/system-settings/staff/get-staff")
+        var request = get("/my-house/admin/system-settings/staff/get-staff")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails))
                 .param("page", "0")
                 .param("pageSize", "10");
@@ -244,7 +252,8 @@ class StaffControllerTest {
                 staff.getRole(),
                 staff.getStatus()
         );
-        var request = get("/admin/system-settings/staff/get-staff/1")
+        var request = get("/my-house/admin/system-settings/staff/get-staff/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -287,7 +296,8 @@ class StaffControllerTest {
                 staff.getRole().getId(),
                 staff.getStatus()
         );
-        var request = post("/admin/system-settings/staff/edit-staff/1")
+        var request = post("/my-house/admin/system-settings/staff/edit-staff/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("staffEditRequest", staffEditRequest);
@@ -318,7 +328,8 @@ class StaffControllerTest {
                 staff.getRole().getId(),
                 staff.getStatus()
         );
-        var request = post("/admin/system-settings/staff/edit-staff/1")
+        var request = post("/my-house/admin/system-settings/staff/edit-staff/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("staffEditRequest", staffEditRequest);
@@ -350,7 +361,8 @@ class StaffControllerTest {
                 staff.getRole().getId(),
                 staff.getStatus()
         );
-        var request = post("/admin/system-settings/staff/edit-staff/1")
+        var request = post("/my-house/admin/system-settings/staff/edit-staff/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("staffEditRequest", staffEditRequest);
@@ -382,7 +394,8 @@ class StaffControllerTest {
                 staff.getRole().getId(),
                 staff.getStatus()
         );
-        var request = post("/admin/system-settings/staff/edit-staff/1")
+        var request = post("/my-house/admin/system-settings/staff/edit-staff/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("staffEditRequest", staffEditRequest);
@@ -402,7 +415,8 @@ class StaffControllerTest {
     @Test
     void deleteStaffById_WhenSuccessDelete() throws Exception {
         // given
-        var request = delete("/admin/system-settings/staff/delete/1")
+        var request = delete("/my-house/admin/system-settings/staff/delete/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails));
 
@@ -421,7 +435,8 @@ class StaffControllerTest {
     @Test
     void deleteStaffById_WhenDeletingIsFailed() throws Exception {
         // given
-        var request = delete("/admin/system-settings/staff/delete/1")
+        var request = delete("/my-house/admin/system-settings/staff/delete/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails));
 
@@ -440,7 +455,8 @@ class StaffControllerTest {
     @Test
     void sendInviteToStaff() throws Exception {
         // given
-        var request = post("/admin/system-settings/staff/send-invite")
+        var request = post("/my-house/admin/system-settings/staff/send-invite")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .param("staffId", "1");

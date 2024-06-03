@@ -50,7 +50,7 @@ class AboutPageControllerTest {
     @Test
     void getAboutUsPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/site-management/about-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -67,7 +67,7 @@ class AboutPageControllerTest {
         when(aboutPageService.getAboutPageResponse()).thenReturn(aboutPageResponse);
 
         this.mockMvc.perform(get("/my-house/admin/site-management/about-page/get")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -95,7 +95,7 @@ class AboutPageControllerTest {
         doNothing().when(aboutPageService).updateAboutPage(any(AboutPageRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/site-management/about-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("aboutPageRequest", aboutPageRequest))
@@ -116,7 +116,7 @@ class AboutPageControllerTest {
         doReturn(Optional.of(aboutPage)).when(aboutPageRepo).findById(anyLong());
 
         this.mockMvc.perform(post("/my-house/admin/site-management/about-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("aboutPageRequest", aboutPageRequest))

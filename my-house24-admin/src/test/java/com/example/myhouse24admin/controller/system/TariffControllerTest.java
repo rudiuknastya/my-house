@@ -61,7 +61,8 @@ class TariffControllerTest {
     void viewTariff() throws Exception {
 
         // given
-        var request = get("/admin/system-settings/tariffs")
+        var request = get("/my-house/admin/system-settings/tariffs")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -79,7 +80,8 @@ class TariffControllerTest {
     void viewAddTariff() throws Exception {
         // given
 
-        var request = get("/admin/system-settings/tariffs/add")
+        var request = get("/my-house/admin/system-settings/tariffs/add")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails))
                 .flashAttr("copyTariff", tariffResponse);
 
@@ -98,7 +100,8 @@ class TariffControllerTest {
     @Test
     void viewEditTariff() throws Exception {
         // given
-        var request = get("/admin/system-settings/tariffs/edit-tariff/1")
+        var request = get("/my-house/admin/system-settings/tariffs/edit-tariff/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -114,7 +117,8 @@ class TariffControllerTest {
     @Test
     void viewTariffBuId() throws Exception {
         // given
-        var request = get("/admin/system-settings/tariffs/view-tariff/1")
+        var request = get("/my-house/admin/system-settings/tariffs/view-tariff/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -140,7 +144,8 @@ class TariffControllerTest {
         var tariffRequestWrap = new TariffRequestWrap();
         tariffRequestWrap.setTariffRequest(tariffRequest);
 
-        var request = post("/admin/system-settings/tariffs/add-tariff")
+        var request = post("/my-house/admin/system-settings/tariffs/add-tariff")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("tariffRequest", tariffRequestWrap);
@@ -161,7 +166,8 @@ class TariffControllerTest {
     void getAllTariffs() throws Exception {
         // given
         var pageable = Pageable.ofSize(10);
-        var request = get("/admin/system-settings/tariffs/get-tariffs")
+        var request = get("/my-house/admin/system-settings/tariffs/get-tariffs")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails))
                 .param("page", String.valueOf(pageable.getPageNumber()))
                 .param("pageSize", String.valueOf(pageable.getPageSize()));
@@ -191,7 +197,8 @@ class TariffControllerTest {
     @Test
     void testGetAllTariffs() throws Exception {
         // given
-        var request = get("/admin/system-settings/tariffs/get-tariff-by-id/1")
+        var request = get("/my-house/admin/system-settings/tariffs/get-tariff-by-id/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -227,7 +234,8 @@ class TariffControllerTest {
         var tariffRequestWrap = new TariffRequestWrap();
         tariffRequestWrap.setTariffRequest(tariffRequest);
 
-        var request = post("/admin/system-settings/tariffs/edit-tariff/1")
+        var request = post("/my-house/admin/system-settings/tariffs/edit-tariff/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("tariffRequest", tariffRequestWrap);
@@ -248,7 +256,8 @@ class TariffControllerTest {
     void deleteTariff_WhenSuccessDelete() throws Exception {
         clearInvocations(tariffService);
         // given
-        var request = delete("/admin/system-settings/tariffs/delete/1")
+        var request = delete("/my-house/admin/system-settings/tariffs/delete/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails));
 
@@ -269,7 +278,8 @@ class TariffControllerTest {
     @Test
     void deleteTariff_WhenFailDelete() throws Exception {
         // given
-        var request = delete("/admin/system-settings/tariffs/delete/1")
+        var request = delete("/my-house/admin/system-settings/tariffs/delete/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails));
 
@@ -290,7 +300,8 @@ class TariffControllerTest {
     @Test
     void deleteTariff_WhenExceptionOnDelete() throws Exception {
         // given
-        var request = delete("/admin/system-settings/tariffs/delete/1")
+        var request = delete("/my-house/admin/system-settings/tariffs/delete/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails));
 
@@ -312,7 +323,8 @@ class TariffControllerTest {
     @Test
     void copyTariffById() throws Exception {
         // given
-        var request = get("/admin/system-settings/tariffs/copy-tariff/1")
+        var request = get("/my-house/admin/system-settings/tariffs/copy-tariff/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails))
                 .flashAttr("attributes", new RedirectAttributesModelMap());
 
@@ -325,7 +337,7 @@ class TariffControllerTest {
                 .andDo(print())
                 .andExpectAll(
                         status().is3xxRedirection(),
-                        redirectedUrl("/admin/system-settings/tariffs/add"),
+                        redirectedUrl("/my-house/admin/system-settings/tariffs/add"),
                         flash().attribute("copyTariff", tariffResponse)
                 );
 

@@ -43,7 +43,7 @@ class ContactsPageControllerTest {
     @Test
     void getContactsPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/site-management/contacts-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -56,7 +56,7 @@ class ContactsPageControllerTest {
         when(contactsPageService.getContactsPageDto()).thenReturn(contactsPageDto);
 
         this.mockMvc.perform(get("/my-house/admin/site-management/contacts-page/get")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -70,7 +70,7 @@ class ContactsPageControllerTest {
         doNothing().when(contactsPageService).updateContactsPage(any(ContactsPageDto.class));
 
         this.mockMvc.perform(post("/my-house/admin/site-management/contacts-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("contactsPageDto", contactsPageDto))
@@ -84,7 +84,7 @@ class ContactsPageControllerTest {
                 "", "", "", "", "");
 
         this.mockMvc.perform(post("/my-house/admin/site-management/contacts-page")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("contactsPageDto", notValidContactsPageDto))

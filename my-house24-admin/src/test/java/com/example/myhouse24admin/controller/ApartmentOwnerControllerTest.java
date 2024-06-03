@@ -75,7 +75,7 @@ class ApartmentOwnerControllerTest {
     @Test
     void getOwnersPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/owners")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -92,7 +92,7 @@ class ApartmentOwnerControllerTest {
                 .thenReturn(new PageImpl<>(List.of(tableApartmentOwnerResponse), pageable,5));
 
         this.mockMvc.perform(get("/my-house/admin/owners/getOwners")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("page", "0")
                         .param("pageSize","1")
@@ -116,7 +116,7 @@ class ApartmentOwnerControllerTest {
     @Test
     void getOwnerPageForCreate() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/owners/add")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -127,7 +127,7 @@ class ApartmentOwnerControllerTest {
     @Test
     void getOwnerStatuses() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/owners/get-statuses")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -148,7 +148,7 @@ class ApartmentOwnerControllerTest {
         doNothing().when(apartmentOwnerService).createApartmentOwner(any(CreateApartmentOwnerRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/owners/add")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("createApartmentOwnerRequest", createApartmentOwnerRequest))
@@ -164,7 +164,7 @@ class ApartmentOwnerControllerTest {
                         "", "Anastasiia","", multipartFile);
 
         this.mockMvc.perform(post("/my-house/admin/owners/add")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("createApartmentOwnerRequest", createApartmentOwnerRequest))
@@ -175,7 +175,7 @@ class ApartmentOwnerControllerTest {
     @Test
     void getOwnerPageForEdit() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/owners/edit/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -194,7 +194,7 @@ class ApartmentOwnerControllerTest {
                 .thenReturn(apartmentOwnerResponse);
 
         this.mockMvc.perform(get("/my-house/admin/owners/edit/get-owner/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -217,7 +217,7 @@ class ApartmentOwnerControllerTest {
 
 
         this.mockMvc.perform(post("/my-house/admin/owners/edit/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("editApartmentOwnerRequest", editApartmentOwnerRequest))
@@ -235,7 +235,7 @@ class ApartmentOwnerControllerTest {
                         "", "Anastasiia","", multipartFile);
 
         this.mockMvc.perform(post("/my-house/admin/owners/edit/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("editApartmentOwnerRequest", editApartmentOwnerRequest))
@@ -248,7 +248,7 @@ class ApartmentOwnerControllerTest {
         when(apartmentOwnerService.deleteOwnerById(anyLong())).thenReturn(true);
 
         this.mockMvc.perform(get("/my-house/admin/owners/delete/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -258,7 +258,7 @@ class ApartmentOwnerControllerTest {
         when(apartmentOwnerService.deleteOwnerById(anyLong())).thenReturn(false);
 
         this.mockMvc.perform(get("/my-house/admin/owners/delete/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isConflict());
@@ -267,7 +267,7 @@ class ApartmentOwnerControllerTest {
     @Test
     void getViewOwnerPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/owners/view-owner/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -284,7 +284,7 @@ class ApartmentOwnerControllerTest {
         when(apartmentOwnerService.getApartmentOwnerResponseForView(anyLong())).thenReturn(viewApartmentOwnerResponse);
 
         this.mockMvc.perform(get("/my-house/admin/owners/view-owner/get/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -301,7 +301,7 @@ class ApartmentOwnerControllerTest {
                 .thenReturn(new PageImpl<>(List.of(apartmentOwnerShortResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/owners/get-owners")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("page", "0")
                         .param("pageSize","1")
@@ -321,7 +321,7 @@ class ApartmentOwnerControllerTest {
                 .thenReturn(new PageImpl<>(List.of(houseNameResponse), pageable, 5));
 
         this.mockMvc.perform(get("/my-house/admin/owners/get-houses")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails))
                         .param("search", "search")
                         .param("page", "1"))
@@ -340,7 +340,7 @@ class ApartmentOwnerControllerTest {
         doNothing().when(mailService).sendActivationToOwner(anyString(), anyLong());
 
         this.mockMvc.perform(post("/my-house/admin/owners/send-activation/{id}", 1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails)))
                 .andDo(print())
@@ -350,7 +350,7 @@ class ApartmentOwnerControllerTest {
     @Test
     void getSendInvitationPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/owners/send-invitation")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -363,7 +363,7 @@ class ApartmentOwnerControllerTest {
         doNothing().when(mailService).sendInvitationToOwner(any(InvitationRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/owners/send-invitation")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invitationRequest", invitationRequest))
@@ -377,7 +377,7 @@ class ApartmentOwnerControllerTest {
         InvitationRequest invitationRequest = new InvitationRequest("");
 
         this.mockMvc.perform(post("/my-house/admin/owners/send-invitation")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invitationRequest", invitationRequest))

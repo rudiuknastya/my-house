@@ -50,7 +50,8 @@ class ServiceControllerTest {
     @Test
     void viewServices() throws Exception {
         // given
-        var request = get("/admin/system-settings/services")
+        var request = get("/my-house/admin/system-settings/services")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -67,7 +68,8 @@ class ServiceControllerTest {
         // given
         var units = new UnitOfMeasurementDtoListWrap();
         units.setUnitOfMeasurements(List.of(unitOfMeasurementDto));
-        var request = post("/admin/system-settings/services/update-measurement-unist")
+        var request = post("/my-house/admin/system-settings/services/update-measurement-unist")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("units", units);
@@ -88,7 +90,8 @@ class ServiceControllerTest {
         // given
         var units = new UnitOfMeasurementDtoListWrap();
         units.setUnitOfMeasurements(List.of(unitOfMeasurementDto));
-        var request = post("/admin/system-settings/services/update-measurement-unist")
+        var request = post("/my-house/admin/system-settings/services/update-measurement-unist")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("units", units);
@@ -109,7 +112,8 @@ class ServiceControllerTest {
     @Test
     void getAllMeasurementUnits() throws Exception {
         // given
-        var request = get("/admin/system-settings/services/get-measurement-units")
+        var request = get("/my-house/admin/system-settings/services/get-measurement-units")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -144,7 +148,8 @@ class ServiceControllerTest {
                 true,
                 unitOfMeasurementDto
         );
-        var request = get("/admin/system-settings/services/get-services")
+        var request = get("/my-house/admin/system-settings/services/get-services")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -180,7 +185,8 @@ class ServiceControllerTest {
         var serviceDto = new ServiceDto(1L, "testName", true, 1L);
         var services = new ServiceDtoListWrap();
         services.setServices(List.of(serviceDto, serviceDto));
-        var request = post("/admin/system-settings/services/update-services")
+        var request = post("/my-house/admin/system-settings/services/update-services")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("servicesList", services);
@@ -204,7 +210,8 @@ class ServiceControllerTest {
         var serviceDto = new ServiceDto(1L, "testName", true, 1L);
         var services = new ServiceDtoListWrap();
         services.setServices(List.of(serviceDto, serviceDto));
-        var request = post("/admin/system-settings/services/update-services")
+        var request = post("/my-house/admin/system-settings/services/update-services")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("servicesList", services);
@@ -229,7 +236,8 @@ class ServiceControllerTest {
                 true,
                 unitOfMeasurementDto
         );
-        var request = get("/admin/system-settings/services/get-service-by-id/1")
+        var request = get("/my-house/admin/system-settings/services/get-service-by-id/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when

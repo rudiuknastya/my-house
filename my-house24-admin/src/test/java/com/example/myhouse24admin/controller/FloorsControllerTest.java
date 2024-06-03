@@ -42,7 +42,7 @@ class FloorsControllerTest {
         floorResponse.setId(1L);
         floorResponse.setName("test");
 
-        var request = get("/admin/floors/get-floors-by-house/1")
+        var request = get("/floors/get-floors-by-house/1")
                 .with(user(userDetails))
                 .param("page", String.valueOf(pageable.getPageNumber()))
                 .param("pageSize", String.valueOf(pageable.getPageSize()))

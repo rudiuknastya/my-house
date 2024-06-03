@@ -46,7 +46,7 @@ class AuthenticationControllerTest {
 
     @Test
     void getLoginPage() throws Exception {
-        this.mockMvc.perform(get("/admin/login"))
+        this.mockMvc.perform(get("/login"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("security/login"));
@@ -55,7 +55,7 @@ class AuthenticationControllerTest {
     void getLoginPage_For_Authenticated_User() throws Exception {
         when(roleService.getAllowedEndPoint(anyString())).thenReturn("statistic");
 
-        this.mockMvc.perform(get("/admin/login")
+        this.mockMvc.perform(get("/login")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isFound())
@@ -64,7 +64,7 @@ class AuthenticationControllerTest {
 
     @Test
     void getForgotPasswordPage() throws Exception {
-        this.mockMvc.perform(get("/admin/forgotPassword"))
+        this.mockMvc.perform(get("/forgotPassword"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("security/forgotPassword"));
@@ -77,14 +77,14 @@ class AuthenticationControllerTest {
         doNothing().when(mailService).sendToken(anyString(), any(EmailRequest.class), anyString());
         doReturn(true).when(staffRepo).existsStaffByEmail(eq("ruduknasta13@gmail.com"));
 
-        this.mockMvc.perform(post("/admin/forgotPassword")
+        this.mockMvc.perform(post("/forgotPassword")
                         .flashAttr("emailRequest",new EmailRequest("ruduknasta13@gmail.com")))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
     @Test
     void sendPasswordResetToken_EmailRequest_Not_Valid() throws Exception {
-        this.mockMvc.perform(post("/admin/forgotPassword")
+        this.mockMvc.perform(post("/forgotPassword")
                         .with(csrf())
                         .flashAttr("emailRequest",new EmailRequest("")))
                 .andDo(print())
@@ -93,7 +93,7 @@ class AuthenticationControllerTest {
     }
     @Test
     void getSentTokenPage() throws Exception {
-        this.mockMvc.perform(get("/admin/sentToken"))
+        this.mockMvc.perform(get("/sentToken"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("security/sentToken"));
@@ -103,7 +103,7 @@ class AuthenticationControllerTest {
     void changePassword_Token_Valid() throws Exception {
         when(passwordResetTokenService.isPasswordResetTokenValid(anyString())).thenReturn(true);
 
-        this.mockMvc.perform(get("/admin/changePassword")
+        this.mockMvc.perform(get("/changePassword")
                         .param("token","token"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -114,7 +114,7 @@ class AuthenticationControllerTest {
     void changePassword_Token_Not_Valid() throws Exception {
         when(passwordResetTokenService.isPasswordResetTokenValid(anyString())).thenReturn(false);
 
-        this.mockMvc.perform(get("/admin/changePassword")
+        this.mockMvc.perform(get("/changePassword")
                         .param("token","token"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -128,7 +128,7 @@ class AuthenticationControllerTest {
         when(passwordResetTokenService.isPasswordResetTokenValid(anyString())).thenReturn(true);
         doNothing().when(passwordResetTokenService).updatePassword(anyString(), anyString());
 
-        this.mockMvc.perform(post("/admin/changePassword")
+        this.mockMvc.perform(post("/changePassword")
                         .param("token","token")
                         .flashAttr("forgotPasswordRequest", forgotPasswordRequest))
                 .andDo(print())
@@ -140,7 +140,7 @@ class AuthenticationControllerTest {
                 new ForgotPasswordRequest("Anastasiia12/", "Anastasiia12/");
         when(passwordResetTokenService.isPasswordResetTokenValid(anyString())).thenReturn(false);
 
-        this.mockMvc.perform(post("/admin/changePassword")
+        this.mockMvc.perform(post("/changePassword")
                         .with(csrf())
                         .param("token","token")
                         .flashAttr("forgotPasswordRequest", forgotPasswordRequest))
@@ -151,7 +151,7 @@ class AuthenticationControllerTest {
     void setNewPassword_ForgotPasswordRequest_Not_Valid() throws Exception {
         ForgotPasswordRequest forgotPasswordRequest =
                 new ForgotPasswordRequest("", "Anastasiia");
-        this.mockMvc.perform(post("/admin/changePassword")
+        this.mockMvc.perform(post("/changePassword")
                         .with(csrf())
                         .param("token","token")
                         .flashAttr("forgotPasswordRequest", forgotPasswordRequest))
@@ -161,7 +161,7 @@ class AuthenticationControllerTest {
     }
     @Test
     void getSuccessPage() throws Exception {
-        this.mockMvc.perform(get("/admin/success"))
+        this.mockMvc.perform(get("/success"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("security/success"));
@@ -169,7 +169,7 @@ class AuthenticationControllerTest {
 
     @Test
     void getTokenExpiredPage() throws Exception {
-        this.mockMvc.perform(get("/admin/tokenExpired"))
+        this.mockMvc.perform(get("/tokenExpired"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("security/tokenExpired"));

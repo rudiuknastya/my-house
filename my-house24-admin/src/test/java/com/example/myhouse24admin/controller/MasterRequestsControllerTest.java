@@ -52,7 +52,7 @@ class MasterRequestsControllerTest {
     void viewAddMasterRequest() throws Exception {
         // given
         var request = get("/my-house/admin/master-requests/add-request")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -70,7 +70,7 @@ class MasterRequestsControllerTest {
     void viewMasterRequests() throws Exception {
         // given
         var request = get("/my-house/admin/master-requests")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -88,7 +88,7 @@ class MasterRequestsControllerTest {
     void viewEditMasterRequest() throws Exception {
         // given
         var request = get("/my-house/admin/master-requests/edit-request/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -106,7 +106,7 @@ class MasterRequestsControllerTest {
     void viewMasterRequest() throws Exception {
         // given
         var request = get("/my-house/admin/master-requests/view-request/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -135,7 +135,7 @@ class MasterRequestsControllerTest {
         addRequest.setComment("test");
 
 
-        var request = post("/admin/master-requests/add-request")
+        var request = post("/master-requests/add-request")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", addRequest);
@@ -166,7 +166,7 @@ class MasterRequestsControllerTest {
                 MasterRequestStatus.NEW,
                 "PLUMBER");
 
-        var request = get("/admin/master-requests/get-requests")
+        var request = get("/master-requests/get-requests")
                 .with(user(userDetails))
                 .param("page", String.valueOf(pageable.getPageNumber()))
                 .param("pageSize", String.valueOf(pageable.getPageSize()));
@@ -207,7 +207,7 @@ class MasterRequestsControllerTest {
                 Instant.now(),
                 "PLUMBER");
 
-        var request = get("/admin/master-requests/get-request/1")
+        var request = get("/master-requests/get-request/1")
                 .with(user(userDetails));
 
         // when
@@ -245,7 +245,7 @@ class MasterRequestsControllerTest {
         editRequest.setComment("test");
 
 
-        var request = post("/admin/master-requests/edit-request/1")
+        var request = post("/master-requests/edit-request/1")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", editRequest);
@@ -265,7 +265,7 @@ class MasterRequestsControllerTest {
     @Test
     void deleteMasterRequest_WhenSuccessDelete() throws Exception {
         // given
-        var request = delete("/admin/master-requests/delete/1")
+        var request = delete("/master-requests/delete/1")
                 .with(csrf())
                 .with(user(userDetails));
 
@@ -285,7 +285,7 @@ class MasterRequestsControllerTest {
     @Test
     void deleteMasterRequest_WhenDeleteIsFailed() throws Exception {
         // given
-        var request = delete("/admin/master-requests/delete/1")
+        var request = delete("/master-requests/delete/1")
                 .with(csrf())
                 .with(user(userDetails));
 

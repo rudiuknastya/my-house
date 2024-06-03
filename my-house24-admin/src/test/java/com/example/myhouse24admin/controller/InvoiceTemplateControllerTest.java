@@ -45,7 +45,7 @@ class InvoiceTemplateControllerTest {
     @Test
     void getTemplatesSettingsPage() throws Exception {
         this.mockMvc.perform(get("/my-house/admin/invoices/templates-settings")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -61,7 +61,7 @@ class InvoiceTemplateControllerTest {
                 .thenReturn(List.of(invoiceTemplateResponse));
 
         this.mockMvc.perform(get("/my-house/admin/invoices/templates-settings/get")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -83,7 +83,7 @@ class InvoiceTemplateControllerTest {
         doNothing().when(invoiceTemplateService).updateTemplates(any(InvoiceTemplateListRequest.class));
 
         this.mockMvc.perform(post("/my-house/admin/invoices/templates-settings")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceTemplateListRequest", invoiceTemplateListRequest))
@@ -101,7 +101,7 @@ class InvoiceTemplateControllerTest {
         invoiceTemplateListRequest.setInvoiceTemplates(List.of(invoiceTemplateRequest));
 
         this.mockMvc.perform(post("/my-house/admin/invoices/templates-settings")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails))
                         .flashAttr("invoiceTemplateListRequest", invoiceTemplateListRequest))
@@ -115,7 +115,7 @@ class InvoiceTemplateControllerTest {
         doNothing().when(invoiceTemplateService).setDefaultInvoice(anyLong());
 
         this.mockMvc.perform(post("/my-house/admin/invoices/templates-settings/set-default/{id}",1)
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(csrf())
                         .with(user(userDetails)))
                 .andDo(print())
@@ -128,7 +128,7 @@ class InvoiceTemplateControllerTest {
                 .thenReturn(new byte[]{0x01});
 
         this.mockMvc.perform(get("/my-house/admin/invoices/templates-settings/download-template/{fileName}","template.xsl")
-                        .contextPath("/my-house")
+                        .contextPath("/my-house/admin")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())

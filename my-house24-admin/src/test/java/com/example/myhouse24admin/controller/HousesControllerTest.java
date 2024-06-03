@@ -48,7 +48,7 @@ class HousesControllerTest {
     void viewAddHouse() throws Exception {
         // given
         var request = get("/my-house/admin/houses/add")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -66,7 +66,7 @@ class HousesControllerTest {
     void testViewAddHouse() throws Exception {
         // given
         var request = get("/my-house/admin/houses/edit-house/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -84,7 +84,7 @@ class HousesControllerTest {
     void viewHouses() throws Exception {
         // given
         var request = get("/my-house/admin/houses")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -102,7 +102,7 @@ class HousesControllerTest {
     void viewHouseCard() throws Exception {
         // given
         var request = get("/my-house/admin/houses/view-house/1")
-                .contextPath("/my-house")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -135,7 +135,7 @@ class HousesControllerTest {
         addRequest.setFloors(List.of(floorRequest));
         addRequest.setImages(List.of(multipartFile));
 
-        var request = post("/admin/houses/add")
+        var request = post("/houses/add")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", addRequest);
@@ -160,7 +160,7 @@ class HousesControllerTest {
         houseShortResponse.setName("test");
         houseShortResponse.setAddress("test");
 
-        var request = get("/admin/houses/get-houses")
+        var request = get("/houses/get-houses")
                 .with(user(userDetails))
                 .param("page", String.valueOf(pageable.getPageNumber()))
                 .param("pageSize", String.valueOf(pageable.getPageSize()));
@@ -189,7 +189,7 @@ class HousesControllerTest {
     @Test
     void deleteHouseById_WhenSuccessDelete() throws Exception {
         // given
-        var request = delete("/admin/houses/delete/1")
+        var request = delete("/houses/delete/1")
                 .with(csrf())
                 .with(user(userDetails));
 
@@ -208,7 +208,7 @@ class HousesControllerTest {
     @Test
     void deleteHouseById_WhenFailDelete() throws Exception {
         // given
-        var request = delete("/admin/houses/delete/1")
+        var request = delete("/houses/delete/1")
                 .with(csrf())
                 .with(user(userDetails));
 
@@ -239,7 +239,7 @@ class HousesControllerTest {
         houseShortResponse.setSectionsCount(2);
         houseShortResponse.setFloorsCount(2);
 
-        var request = get("/admin/houses/get-view-house/1")
+        var request = get("/houses/get-view-house/1")
                 .with(user(userDetails));
 
         // when
@@ -279,7 +279,7 @@ class HousesControllerTest {
         houseResponse.setImage4("test_image_4");
         houseResponse.setImage5("test_image_5");
 
-        var request = get("/admin/houses/get-house/1")
+        var request = get("/houses/get-house/1")
                 .with(user(userDetails));
 
         // when
@@ -328,7 +328,7 @@ class HousesControllerTest {
         staffRequest.setFirstName("test");
         addRequest.setStaff(List.of(staffRequest));
 
-        var request = post("/admin/houses/edit-house/1")
+        var request = post("/houses/edit-house/1")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("request", addRequest);

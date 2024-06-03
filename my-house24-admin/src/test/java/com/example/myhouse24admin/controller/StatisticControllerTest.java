@@ -44,7 +44,8 @@ class StatisticControllerTest {
     @Test
     void getStatisticPage() throws Exception {
         // given
-        var request = get("/my-house/admin/statistic").contextPath("/my-house")
+        var request = get("/my-house/admin/statistic")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -66,7 +67,7 @@ class StatisticControllerTest {
                 BigDecimal.valueOf(2000),
                 BigDecimal.valueOf(3000)
         );
-        var request = get("/admin/statistic/get-accounts-statistic")
+        var request = get("/statistic/get-accounts-statistic")
                 .with(user(userDetails));
 
         // when
@@ -100,7 +101,7 @@ class StatisticControllerTest {
                 10,
                 10
         );
-        var request = get("/admin/statistic/get-general-statistic")
+        var request = get("/statistic/get-general-statistic")
                 .with(user(userDetails));
 
         // when
@@ -129,7 +130,7 @@ class StatisticControllerTest {
     @Test
     void getGeneralStatistic_WhenThrowsInterruptedException() throws Exception {
         // given
-        var request = get("/admin/statistic/get-general-statistic")
+        var request = get("/statistic/get-general-statistic")
                 .with(user(userDetails));
 
         // when
@@ -153,7 +154,7 @@ class StatisticControllerTest {
                 BigDecimal.valueOf(2000)
         );
         var incomeExpenseStatisticPerYear = List.of(statisticItem, statisticItem, statisticItem);
-        var request = get("/admin/statistic/get-income-expense-statistic")
+        var request = get("/statistic/get-income-expense-statistic")
                 .with(user(userDetails));
 
         // when
@@ -181,7 +182,7 @@ class StatisticControllerTest {
                 BigDecimal.valueOf(2000)
         );
         var paidArrearsStatisticPerYear = List.of(statisticItem, statisticItem, statisticItem);
-        var request = get("/admin/statistic/get-paid-arrears-statistic")
+        var request = get("/statistic/get-paid-arrears-statistic")
                 .with(user(userDetails));
 
         // when

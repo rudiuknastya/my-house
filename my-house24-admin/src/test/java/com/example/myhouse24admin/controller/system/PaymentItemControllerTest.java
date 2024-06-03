@@ -53,7 +53,8 @@ class PaymentItemControllerTest {
     @Test
     void viewPaymentItems() throws Exception {
         // given
-        var request = get("/admin/system-settings/payment-items")
+        var request = get("/my-house/admin/system-settings/payment-items")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -70,7 +71,8 @@ class PaymentItemControllerTest {
     @Test
     void editItemById() throws Exception {
         // given
-        var request = get("/admin/system-settings/payment-items/edit-item/1")
+        var request = get("/my-house/admin/system-settings/payment-items/edit-item/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -87,7 +89,8 @@ class PaymentItemControllerTest {
     @Test
     void testEditItemById() throws Exception {
         // given
-        var request = get("/admin/system-settings/payment-items/add-item")
+        var request = get("/my-house/admin/system-settings/payment-items/add-item")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         // when
@@ -107,7 +110,8 @@ class PaymentItemControllerTest {
         var pageable = PageRequest.of(0, 10);
         var searchParams = new HashMap<String, String>();
         searchParams.put("page", "0");
-        var request = get("/admin/system-settings/payment-items/get-items")
+        var request = get("/my-house/admin/system-settings/payment-items/get-items")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails))
                 .param("page", "0")
                 .param("pageSize", "10");
@@ -146,7 +150,8 @@ class PaymentItemControllerTest {
     @Test
     void getItemById() throws Exception {
         // given
-        var request = get("/admin/system-settings/payment-items/get-item/1")
+        var request = get("/my-house/admin/system-settings/payment-items/get-item/1")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
         // when
         when(paymentItemService.getItemById(eq(1L)))
@@ -169,7 +174,8 @@ class PaymentItemControllerTest {
     @Test
     void testEditItemById1_WhenRequestIsNotValid() throws Exception {
         // given
-        var request = post("/admin/system-settings/payment-items/edit-item/1")
+        var request = post("/my-house/admin/system-settings/payment-items/edit-item/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("paymentItem", new PaymentItemDto());
@@ -187,7 +193,8 @@ class PaymentItemControllerTest {
     @Test
     void testEditItemById1_WhenRequestIsValid() throws Exception {
         // given
-        var request = post("/admin/system-settings/payment-items/edit-item/1")
+        var request = post("/my-house/admin/system-settings/payment-items/edit-item/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("paymentItem", paymentItemDto);
@@ -205,7 +212,8 @@ class PaymentItemControllerTest {
     @Test
     void addItem() throws Exception {
         // given
-        var request = post("/admin/system-settings/payment-items/add-item")
+        var request = post("/my-house/admin/system-settings/payment-items/add-item")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails))
                 .flashAttr("paymentItem", paymentItemDto);
@@ -224,7 +232,8 @@ class PaymentItemControllerTest {
     @Test
     void getAllItemTypes() throws Exception {
         // given
-        var request = get("/admin/system-settings/payment-items/get-item-types")
+        var request = get("/my-house/admin/system-settings/payment-items/get-item-types")
+                .contextPath("/my-house/admin")
                 .with(user(userDetails));
 
         var itemTypesLength = PaymentType.values().length;
@@ -244,7 +253,8 @@ class PaymentItemControllerTest {
     @Test
     void deletePaymentItem_WhenSuccessDeleted() throws Exception {
         // given
-        var request = delete("/admin/system-settings/payment-items/delete/1")
+        var request = delete("/my-house/admin/system-settings/payment-items/delete/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails));
 
@@ -262,7 +272,8 @@ class PaymentItemControllerTest {
     @Test
     void deletePaymentItem_WhenFailDeleted() throws Exception {
         // given
-        var request = delete("/admin/system-settings/payment-items/delete/1")
+        var request = delete("/my-house/admin/system-settings/payment-items/delete/1")
+                .contextPath("/my-house/admin")
                 .with(csrf())
                 .with(user(userDetails));
 
