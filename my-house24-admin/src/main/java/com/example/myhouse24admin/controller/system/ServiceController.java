@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("admin/system-settings/services")
+@RequestMapping("/system-settings/services")
 public class ServiceController {
 
     private final UnitOfMeasurementService unitOfMeasurementService;

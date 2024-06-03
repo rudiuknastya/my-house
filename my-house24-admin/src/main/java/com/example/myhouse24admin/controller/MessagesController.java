@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/messages")
+@RequestMapping("/messages")
 public class MessagesController {
 
     private final MessageService messageService;

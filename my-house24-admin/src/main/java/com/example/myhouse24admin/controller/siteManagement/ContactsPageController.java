@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/admin/site-management/contacts-page")
+@RequestMapping("/site-management/contacts-page")
 public class ContactsPageController {
     private final ContactsPageService contactsPageService;
 

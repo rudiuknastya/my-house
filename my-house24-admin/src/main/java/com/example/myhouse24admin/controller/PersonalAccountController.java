@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/personal-accounts")
+@RequestMapping("/personal-accounts")
 public class PersonalAccountController {
 
     private final PersonalAccountService personalAccountService;

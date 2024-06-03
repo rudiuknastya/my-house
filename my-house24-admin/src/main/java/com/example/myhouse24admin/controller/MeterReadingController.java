@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/meter-readings")
+@RequestMapping("/meter-readings")
 public class MeterReadingController {
     private final HouseService houseService;
     private final SectionService sectionService;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/admin/site-management/about-page")
+@RequestMapping("/site-management/about-page")
 public class AboutPageController {
     private final AboutPageService aboutPageService;
 

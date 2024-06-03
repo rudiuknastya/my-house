@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/admin/owners")
+@RequestMapping("/owners")
 public class ApartmentOwnerController {
     private final ApartmentOwnerService apartmentOwnerService;
     private final OwnerPasswordResetTokenService ownerPasswordResetTokenService;

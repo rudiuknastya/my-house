@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/admin/site-management/home-page")
+@RequestMapping("/site-management/home-page")
 public class MainPageController {
     private final MainPageService mainPageService;
 

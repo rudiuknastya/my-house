@@ -17,7 +17,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/invoices/templates-settings")
+@RequestMapping("/invoices/templates-settings")
 public class InvoiceTemplateController {
     private final InvoiceTemplateService invoiceTemplateService;
 

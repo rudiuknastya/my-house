@@ -45,7 +45,7 @@ spring:
 
 server:
   servlet:
-    context-path: /my-house24-rudiuk-lesyk
+    context-path: /my-house24-rudiuk-lesyk/admin
   error:
     whitelabel:
       enabled: false

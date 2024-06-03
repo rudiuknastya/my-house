@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@RequestMapping("admin/system-settings/tariffs")
+@RequestMapping("/system-settings/tariffs")
 public class TariffController {
 
     private final TariffService tariffService;

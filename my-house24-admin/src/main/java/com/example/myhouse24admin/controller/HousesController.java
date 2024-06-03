@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/houses")
+@RequestMapping("/houses")
 public class HousesController {
 
     private final HouseService houseService;

@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @Controller
-@RequestMapping("/admin/statistic")
+@RequestMapping("/statistic")
 public class StatisticController {
 
     private final StatisticService statisticService;

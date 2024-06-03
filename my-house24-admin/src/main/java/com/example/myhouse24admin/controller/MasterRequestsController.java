@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/master-requests")
+@RequestMapping("/master-requests")
 public class MasterRequestsController {
 
     private final MasterRequestService masterRequestService;

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 @Controller
-@RequestMapping("admin/system-settings/payment-items")
+@RequestMapping("/system-settings/payment-items")
 public class PaymentItemController {
 
     private final PaymentItemService paymentItemService;

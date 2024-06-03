@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("admin/system-settings/payment-details")
+@RequestMapping("/system-settings/payment-details")
 public class PaymentDetailsController {
 
     private final PaymentDetailsService paymentDetailsService;

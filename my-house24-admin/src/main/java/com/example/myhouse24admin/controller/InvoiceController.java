@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/invoices")
+@RequestMapping("/invoices")
 public class InvoiceController {
     private final HouseService houseService;
     private final SectionService sectionService;

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("admin/system-settings/staff")
+@RequestMapping("/system-settings/staff")
 public class StaffController {
 
     private final StaffService staffService;

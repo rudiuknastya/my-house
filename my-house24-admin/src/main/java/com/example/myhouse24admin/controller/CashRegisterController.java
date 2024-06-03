@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/cash-register")
+@RequestMapping("/cash-register")
 public class CashRegisterController {
 
     private final CashRegisterService cashRegisterService;
