@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/cabinet/messages")
+@RequestMapping("/messages")
 public class MessagesController {
 
     private final MessagesService messagesService;

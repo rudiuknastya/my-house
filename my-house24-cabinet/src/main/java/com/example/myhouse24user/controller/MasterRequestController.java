@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("cabinet/master-requests")
+@RequestMapping("/master-requests")
 public class MasterRequestController {
 
     private final MasterRequestService masterRequestService;

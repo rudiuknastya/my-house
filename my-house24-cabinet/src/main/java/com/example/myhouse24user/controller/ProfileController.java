@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/cabinet/profile")
+@RequestMapping("/profile")
 public class ProfileController {
     private final ApartmentOwnerService apartmentOwnerService;
 

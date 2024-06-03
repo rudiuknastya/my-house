@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/cabinet")
 public class AuthenticationController {
     private final OwnerPasswordResetTokenService ownerPasswordResetTokenService;
     private final MailService mailService;

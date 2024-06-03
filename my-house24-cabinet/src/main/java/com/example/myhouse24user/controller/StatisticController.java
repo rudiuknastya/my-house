@@ -18,7 +18,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping("cabinet/statistic")
+@RequestMapping("/statistic")
 public class StatisticController {
 
     private final StatisticService statisticService;

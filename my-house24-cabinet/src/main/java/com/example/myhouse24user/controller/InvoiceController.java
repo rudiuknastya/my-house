@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/cabinet/invoices")
+@RequestMapping("/invoices")
 public class InvoiceController {
     private final InvoiceService invoiceService;
 
