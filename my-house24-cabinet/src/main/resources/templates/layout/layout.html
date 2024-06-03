@@ -133,47 +133,47 @@
 
             <div class="menu-inner-shadow"></div>
             <ul class="menu-inner py-1" th:with="apartments = ${#authentication.principal.apartments}">
-                <li class="menu-item" data-parrent="/cabinet/statistic/">
+                <li class="menu-item" data-parrent="/statistic/">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons ti ti-chart-pie"></i>
                         <div th:text="#{menu-item-statistic}"></div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item" th:each="apartment : ${apartments}">
-                            <a th:href="@{/cabinet/statistic/{id}(id=${apartment.id})}" class="menu-link">
+                            <a th:href="@{/statistic/{id}(id=${apartment.id})}" class="menu-link">
                                 <div th:text="${apartment.house.name} + ' - '
                                 + #{menu-item-apartmet-short} + ${apartment.apartmentNumber}"></div>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="menu-item" data-parrent="/cabinet/invoices/">
+                <li class="menu-item" data-parrent="/invoices/">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons ti ti-file-spreadsheet"></i>
                         <div th:text="#{menu-item-invoices}"></div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a th:href="@{/cabinet/invoices}" th:text="#{menu-item-invoices-all}"
+                            <a th:href="@{/invoices}" th:text="#{menu-item-invoices-all}"
                                class="menu-link">
                             </a>
                         </li>
                         <li class="menu-item" th:each="apartment : ${apartments}">
-                            <a th:href="@{/cabinet/invoices/{id}(id=${apartment.id})}" class="menu-link">
+                            <a th:href="@{/invoices/{id}(id=${apartment.id})}" class="menu-link">
                                 <div th:text="${apartment.house.name} + ' - '
                                 + #{menu-item-apartmet-short} + ${apartment.apartmentNumber}"></div>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="menu-item" data-parrent="/cabinet/tariffs/">
+                <li class="menu-item" data-parrent="/tariffs/">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons ti ti-calculator"></i>
                         <div th:text="#{menu-item-tariffs}"></div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item" th:each="apartment : ${apartments}">
-                            <a th:href="@{/cabinet/tariffs/{id}(id=${apartment.id})}" class="menu-link">
+                            <a th:href="@{/tariffs/{id}(id=${apartment.id})}" class="menu-link">
                                 <div th:text="${apartment.house.name} + ' - '
                                 + #{menu-item-apartmet-short} + ${apartment.apartmentNumber}"></div>
                             </a>
@@ -182,19 +182,19 @@
                 </li>
 
                 <li class="menu-item">
-                    <a th:href="@{/cabinet/messages}" class="menu-link" id="lin">
+                    <a th:href="@{/messages}" class="menu-link" id="lin">
                         <i class="menu-icon tf-icons ti ti-mail"></i>
                         <div th:text="#{menu-item-messages}"></div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a th:href="@{/cabinet/master-requests}" class="menu-link">
+                    <a th:href="@{/master-requests}" class="menu-link">
                         <i class="menu-icon tf-icons ti ti-users"></i>
                         <div th:text="#{menu-item-master-request}"></div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a th:href="@{/cabinet/profile}" class="menu-link">
+                    <a th:href="@{/profile}" class="menu-link">
                         <i class="menu-icon tf-icons ti ti-user"></i>
                         <div th:text="#{menu-item-profile}"></div>
                     </a>
@@ -281,7 +281,7 @@
                                 </li>
                                 <li class="dropdown-menu-footer border-top">
                                     <a
-                                            th:href="@{/cabinet/messages}"
+                                            th:href="@{/messages}"
                                             class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40 mb-1 align-items-center"
                                     >
                                         Всі повідомлення
@@ -303,7 +303,7 @@
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/cabinet/logout}" id="logoutLink">
+                            <a class="nav-link" th:href="@{/logout}" id="logoutLink">
                                 <h3 class="mb-0"><i class="bi bi-box-arrow-right"></i></h3>
                             </a>
                         </li>

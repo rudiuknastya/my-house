@@ -30,7 +30,7 @@ public class StatisticController {
     @GetMapping
     public ModelAndView viewStatistic(Principal principal) {
         ApartmentOwnerDetails details = (ApartmentOwnerDetails) ((Authentication) principal).getPrincipal();
-        return new ModelAndView("redirect:/cabinet/statistic/" + details.getApartments().get(0).getId());
+        return new ModelAndView("redirect:/statistic/" + details.getApartments().get(0).getId());
     }
 
     @GetMapping("/{apartmentId}")

@@ -33,23 +33,23 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/assets/**", "/pagejs/**", "/cabinet/forgotPassword",
-                                "/cabinet/sentToken", "/cabinet/changePassword",
-                                "/cabinet/tokenExpired", "/cabinet/success",
-                                "/cabinet/register").permitAll()
+                        .requestMatchers("/assets/**", "/pagejs/**", "/forgotPassword",
+                                "/sentToken", "/changePassword",
+                                "/tokenExpired", "/success",
+                                "/register").permitAll()
                         .requestMatchers("/cabinet/**").hasRole("OWNER")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
-                        .loginPage("/cabinet/login")
-                        .loginProcessingUrl("/cabinet/login")
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
                         .successHandler(new CustomAuthenticationSuccessHandler())
                         .permitAll()
                 )
                 .rememberMe((rm) -> rm
                         .tokenRepository(persistentTokenRepository()))
                 .logout((logout) -> logout
-                        .logoutUrl("/cabinet/logout")
+                        .logoutUrl("/logout")
                         .clearAuthentication(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll())
