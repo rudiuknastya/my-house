@@ -22,11 +22,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         if (apartmentOwnerHasApartment(authentication)) {
-            response.sendRedirect(request.getContextPath() + "/cabinet/statistic");
+            response.sendRedirect(request.getContextPath() + "/statistic");
         } else {
             SecurityContext context = SecurityContextHolder.createEmptyContext();
             SecurityContextHolder.setContext(context);
-            failureHandler.setDefaultFailureUrl("/cabinet/login?error");
+            failureHandler.setDefaultFailureUrl("/login?error");
             failureHandler.onAuthenticationFailure(request, response,
                     new LockedException("Ваша квартира не зареєстрована або не активна"));
         }
