@@ -65,7 +65,7 @@ class ProfileControllerTest {
 
     @Test
     void getViewProfilePage() throws Exception {
-        this.mockMvc.perform(get("/cabinet/profile").with(user(userDetails)))
+        this.mockMvc.perform(get("/profile").with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("profile/view-profile"));
@@ -74,7 +74,7 @@ class ProfileControllerTest {
     @Test
     void getProfile() throws Exception {
         when(apartmentOwnerService.getViewOwnerResponse()).thenReturn(expectedViewOwnerResponse);
-        this.mockMvc.perform(get("/cabinet/profile/get").with(user(userDetails)))
+        this.mockMvc.perform(get("/profile/get").with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value(expectedViewOwnerResponse.getFirstName()))
@@ -85,7 +85,7 @@ class ProfileControllerTest {
 
     @Test
     void getEditProfilePage() throws Exception {
-        this.mockMvc.perform(get("/cabinet/profile/edit").with(user(userDetails)))
+        this.mockMvc.perform(get("/profile/edit").with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("profile/edit-profile"));
@@ -94,7 +94,7 @@ class ProfileControllerTest {
     @Test
     void getProfileForEdit() throws Exception {
         when(apartmentOwnerService.getEditOwnerResponse()).thenReturn(expectedEditOwnerResponse);
-        this.mockMvc.perform(get("/cabinet/profile/edit/get").with(user(userDetails)))
+        this.mockMvc.perform(get("/profile/edit/get").with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value(expectedEditOwnerResponse.firstName()))
@@ -106,8 +106,6 @@ class ProfileControllerTest {
 
     @Test
     void updateProfile() throws Exception {
-//        MockMultipartFile multipartFile = new MockMultipartFile("mainImage","file.jpg", MediaType.TEXT_PLAIN_VALUE,"some text".getBytes());
-
         ApartmentOwnerRequest apartmentOwnerRequest = new ApartmentOwnerRequest(1L, "name",
                 "name", "name", "12.09.1990", OwnerStatus.NEW,
                 "about", "+380992401786","+380992401786",
@@ -119,7 +117,7 @@ class ProfileControllerTest {
 
         doNothing().when(apartmentOwnerService).updateProfile(any(ApartmentOwnerRequest.class));
 
-        this.mockMvc.perform(multipart("/cabinet/profile/edit")
+        this.mockMvc.perform(multipart("/profile/edit")
                         .file(multipartFile)
                         .flashAttr("apartmentOwnerRequest",apartmentOwnerRequest)
                         .with(csrf())
@@ -143,7 +141,7 @@ class ProfileControllerTest {
 
         doNothing().when(apartmentOwnerService).updateProfile(any(ApartmentOwnerRequest.class));
 
-        this.mockMvc.perform(multipart("/cabinet/profile/edit")
+        this.mockMvc.perform(multipart("/profile/edit")
                         .file(multipartFile)
                         .flashAttr("apartmentOwnerRequest",apartmentOwnerRequest)
                         .with(csrf())
@@ -157,7 +155,7 @@ class ProfileControllerTest {
 
     @Test
     void getOwnerStatuses() throws Exception {
-        this.mockMvc.perform(get("/cabinet/profile/get-statuses")
+        this.mockMvc.perform(get("/profile/get-statuses")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())

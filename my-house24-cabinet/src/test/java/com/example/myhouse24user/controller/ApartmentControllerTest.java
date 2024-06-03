@@ -47,7 +47,7 @@ class ApartmentControllerTest {
     @Test
     void getOwnerApartments() throws Exception {
         // given
-        var request = get("/cabinet/apartments/get-owner-apartments")
+        var request = get("/apartments/get-owner-apartments")
                 .with(user(userDetails))
                 .param("page", String.valueOf(pageable.getPageNumber()))
                 .param("pageSize", String.valueOf(pageable.getPageSize()));

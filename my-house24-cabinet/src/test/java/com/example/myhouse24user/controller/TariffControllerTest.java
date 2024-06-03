@@ -36,7 +36,7 @@ class TariffControllerTest {
     @Test
     void viewTariff() throws Exception {
         // given
-        var request = get("/cabinet/tariffs/1")
+        var request = get("/tariffs/1")
                 .with(user(userDetails));
 
         // when
@@ -51,7 +51,7 @@ class TariffControllerTest {
     @Test
     void getApartmentTariff() throws Exception {
         // given
-        var request = get("/cabinet/tariffs/get-apartment-tariff/1")
+        var request = get("/tariffs/get-apartment-tariff/1")
                 .with(user(userDetails));
 
         var tariffItem = new TariffItemResponse(

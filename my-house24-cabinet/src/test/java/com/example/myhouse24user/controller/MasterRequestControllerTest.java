@@ -52,7 +52,7 @@ class MasterRequestControllerTest {
     @Test
     void viewMasterRequests() throws Exception {
         // given
-        var request = get("/cabinet/master-requests")
+        var request = get("/master-requests")
                 .with(user(userDetails));
 
         // when
@@ -69,7 +69,7 @@ class MasterRequestControllerTest {
     @Test
     void addMasterRequest() throws Exception {
         // given
-        var request = get("/cabinet/master-requests/add-request")
+        var request = get("/master-requests/add-request")
                 .with(user(userDetails));
 
         // when
@@ -86,7 +86,7 @@ class MasterRequestControllerTest {
     @Test
     void getMasterRequests() throws Exception {
         // given
-        var request = get("/cabinet/master-requests/get-requests")
+        var request = get("/master-requests/get-requests")
                 .with(user(userDetails))
                 .param("page", String.valueOf(pageable.getPageNumber()))
                 .param("pageSize", String.valueOf(pageable.getPageSize()));
@@ -132,7 +132,7 @@ class MasterRequestControllerTest {
         masterRequestAddRequest.setApartmentId(1L);
         masterRequestAddRequest.setVisitDate(now);
 
-        var request = post("/cabinet/master-requests/add-request")
+        var request = post("/master-requests/add-request")
                 .with(csrf())
                 .with(user(userDetails))
                 .param("masterType", masterRequestAddRequest.getMasterType())
@@ -157,7 +157,7 @@ class MasterRequestControllerTest {
     @Test
     void deleteMasterRequest() throws Exception {
         // given
-        var request = delete("/cabinet/master-requests/delete/%s".formatted(1L))
+        var request = delete("/master-requests/delete/%s".formatted(1L))
                 .with(csrf())
                 .with(user(userDetails));
 

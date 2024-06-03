@@ -42,7 +42,7 @@ class StatisticControllerTest {
     @Test
     void viewStatistic() throws Exception {
         // given
-        var request = get("/cabinet/statistic")
+        var request = get("/statistic")
                 .with(user(userDetails));
         // when
         mockMvc.perform(request)
@@ -50,7 +50,7 @@ class StatisticControllerTest {
                 .andDo(print())
                 .andExpectAll(
                         status().is3xxRedirection(),
-                        redirectedUrl("/cabinet/statistic/1")
+                        redirectedUrl("/statistic/1")
                 );
 
     }
@@ -58,7 +58,7 @@ class StatisticControllerTest {
     @Test
     void viewStatisticByApartment() throws Exception {
         // given
-        var request = get("/cabinet/statistic/1")
+        var request = get("/statistic/1")
                 .with(user(userDetails));
         // when
         mockMvc.perform(request)
@@ -73,7 +73,7 @@ class StatisticControllerTest {
     @Test
     void getGeneralStatisticByApartment() throws Exception {
         // given
-        var request = get("/cabinet/statistic/get-general-statistic")
+        var request = get("/statistic/get-general-statistic")
                 .with(user(userDetails))
                 .param("apartment", "1");
 
@@ -98,7 +98,7 @@ class StatisticControllerTest {
     @Test
     void getExpensePerMonthByApartment() throws Exception {
         // given
-        var request = get("/cabinet/statistic/get-expense-per-month")
+        var request = get("/statistic/get-expense-per-month")
                 .with(user(userDetails))
                 .param("apartment", "1");
 
@@ -124,7 +124,7 @@ class StatisticControllerTest {
     @Test
     void getExpensePerYearByApartment() throws Exception {
         // given
-        var request = get("/cabinet/statistic/get-expense-per-year")
+        var request = get("/statistic/get-expense-per-year")
                 .with(user(userDetails))
                 .param("apartment", "1");
 
@@ -150,7 +150,7 @@ class StatisticControllerTest {
     @Test
     void getExpensePerYearOnMonthByApartment() throws Exception {
         // given
-        var request = get("/cabinet/statistic/get-expense-per-year-on-month")
+        var request = get("/statistic/get-expense-per-year-on-month")
                 .with(user(userDetails))
                 .param("apartment", "1");
 

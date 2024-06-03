@@ -59,7 +59,7 @@ class InvoiceControllerTest {
     }
     @Test
     void getInvoicesPage() throws Exception {
-        this.mockMvc.perform(get("/cabinet/invoices").with(user(userDetails)))
+        this.mockMvc.perform(get("/invoices").with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("invoices/invoices"));
@@ -73,7 +73,7 @@ class InvoiceControllerTest {
         when(invoiceService.getInvoiceResponses(anyMap()))
                 .thenReturn(new PageImpl<>(List.of(expectedInvoiceResponse), pageable, 5));
 
-        this.mockMvc.perform(get("/cabinet/invoices/get")
+        this.mockMvc.perform(get("/invoices/get")
                         .with(user(userDetails))
                         .param("requestMap", String.valueOf(requestMap)))
                 .andDo(print())
@@ -86,7 +86,7 @@ class InvoiceControllerTest {
 
     @Test
     void getStatuses() throws Exception {
-        this.mockMvc.perform(get("/cabinet/invoices/get-statuses")
+        this.mockMvc.perform(get("/invoices/get-statuses")
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -97,7 +97,7 @@ class InvoiceControllerTest {
 
     @Test
     void getInvoicesForApartmentPage() throws Exception {
-        this.mockMvc.perform(get("/cabinet/invoices/{id}",1L)
+        this.mockMvc.perform(get("/invoices/{id}",1L)
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -106,7 +106,7 @@ class InvoiceControllerTest {
 
     @Test
     void getViewInvoicePage() throws Exception {
-        this.mockMvc.perform(get("/cabinet/invoices/view-invoice/{id}",1L)
+        this.mockMvc.perform(get("/invoices/view-invoice/{id}",1L)
                         .with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -117,7 +117,7 @@ class InvoiceControllerTest {
     void getViewInvoice() throws Exception {
         when(invoiceService.getViewInvoiceResponse(anyLong()))
                 .thenReturn(expectedViewInvoiceResponse);
-        this.mockMvc.perform(get("/cabinet/invoices/view-invoice/get/{id}",
+        this.mockMvc.perform(get("/invoices/view-invoice/get/{id}",
                         1L).with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -129,7 +129,7 @@ class InvoiceControllerTest {
     @Test
     void downloadInPdf() throws Exception {
         when(invoiceService.createPdfFile(anyLong())).thenReturn(new byte[]{(byte)0xe0});
-        this.mockMvc.perform(get("/cabinet/invoices/view-invoice/download-in-pdf/{id}",
+        this.mockMvc.perform(get("/invoices/view-invoice/download-in-pdf/{id}",
                         1L).with(user(userDetails)))
                 .andDo(print())
                 .andExpect(status().isOk())

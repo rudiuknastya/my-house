@@ -47,7 +47,7 @@ class MessagesControllerTest {
     @Test
     void viewMessages() throws Exception {
         // given
-        var request = get("/cabinet/messages")
+        var request = get("/messages")
                 .with(user(userDetails));
 
         // when
@@ -64,7 +64,7 @@ class MessagesControllerTest {
     @Test
     void viewMessage() throws Exception {
         // given
-        var request = get("/cabinet/messages/view-message/%s".formatted(1))
+        var request = get("/messages/view-message/%s".formatted(1))
                 .with(user(userDetails));
 
         // when
@@ -82,7 +82,7 @@ class MessagesControllerTest {
     void getMessages() throws Exception {
         Pageable pageable = Pageable.ofSize(10);
         // given
-        var request = get("/cabinet/messages/get-messages")
+        var request = get("/messages/get-messages")
                 .with(user(userDetails))
                 .param("page", String.valueOf(pageable.getPageNumber()))
                 .param("pageSize", String.valueOf(pageable.getPageSize()));
@@ -130,7 +130,7 @@ class MessagesControllerTest {
     @Test
     void getMessageById() throws Exception {
         // given
-        var request = get("/cabinet/messages/get-message/%s".formatted(1))
+        var request = get("/messages/get-message/%s".formatted(1))
                 .with(user(userDetails));
 
         var messageResponse = new OwnerMessageResponse(
@@ -167,7 +167,7 @@ class MessagesControllerTest {
     @Test
     void deleteMessages_WhenRequestIsValid() throws Exception {
         // given
-        var request = delete("/cabinet/messages/delete-messages")
+        var request = delete("/messages/delete-messages")
                 .with(csrf())
                 .with(user(userDetails))
                 .param("messagesToDelete", "1");
@@ -187,7 +187,7 @@ class MessagesControllerTest {
     @Test
     void deleteMessages_WhenRequestIsNotValid() throws Exception {
         // given
-        var request = delete("/cabinet/messages/delete-messages")
+        var request = delete("/messages/delete-messages")
                 .with(csrf())
                 .with(user(userDetails))
                 .param("messagesToDelete", "1");
@@ -206,7 +206,7 @@ class MessagesControllerTest {
     @Test
     void readMessage_ReadMessageById() throws Exception {
         // given
-        var request = post("/cabinet/messages/read-message/%s".formatted(1))
+        var request = post("/messages/read-message/%s".formatted(1))
                 .with(csrf())
                 .with(user(userDetails));
 
@@ -224,7 +224,7 @@ class MessagesControllerTest {
     @Test
     void testReadMessage_ReadAllMessagesByIds() throws Exception {
         // given
-        var request = post("/cabinet/messages/read-all-messages")
+        var request = post("/messages/read-all-messages")
                 .with(csrf())
                 .with(user(userDetails))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -248,7 +248,7 @@ class MessagesControllerTest {
 
         Pageable pageable = Pageable.ofSize(10);
         // given
-        var request = get("/cabinet/messages/get-unread-messages")
+        var request = get("/messages/get-unread-messages")
                 .with(user(userDetails))
                 .param("page", String.valueOf(pageable.getPageNumber()))
                 .param("pageSize", String.valueOf(pageable.getPageSize()));
