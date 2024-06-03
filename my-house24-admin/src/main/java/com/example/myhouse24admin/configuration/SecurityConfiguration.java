@@ -41,21 +41,21 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/assets/**","/pagejs/**", "/admin/forgotPassword", "/admin/sentToken", "/admin/changePassword", "/admin/tokenExpired", "/admin/success").permitAll()
+                        .requestMatchers("/assets/**","/pagejs/**", "/forgotPassword", "/sentToken", "/changePassword", "/tokenExpired", "/success").permitAll()
                         .requestMatchers("/admin/**").access(roleBasedVoter)
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling((ex) -> ex
                         .accessDeniedHandler(accessDeniedHandler()))
                 .formLogin((form) -> form
-                        .loginPage("/admin/login")
+                        .loginPage("/login")
                         .successHandler(authenticationSuccessHandler())
                         .permitAll()
                 )
                 .rememberMe((rm)-> rm
                         .tokenRepository(persistentTokenRepository()))
                 .logout((logout) -> logout
-                        .logoutUrl("/admin/logout")
+                        .logoutUrl("/logout")
                         .deleteCookies("JSESSIONID")
                         .permitAll())
                 .addFilterBefore(recaptchaFilter, UsernamePasswordAuthenticationFilter.class);

@@ -34,10 +34,11 @@ public class RoleBasedVoter implements AuthorizationManager<RequestAuthorization
     }
     private String formUriToFind(String requestURI){
         String[] uris = requestURI.split("/");
-        if (uris[3].equals("system-settings")) {
-            return "/" + uris[2] + "/" + uris[3] + "/" + uris[4];
+        System.out.println(uris[2]);
+        if (uris[2].equals("system-settings")) {
+            return "/" + uris[1] + "/" + uris[2] + "/" + uris[3];
         } else {
-             return "/" + uris[2] + "/" + uris[3];
+             return "/" + uris[1] + "/" + uris[2];
         }
     }
 }
