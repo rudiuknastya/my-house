@@ -2,6 +2,7 @@ System with modular monolith architecture for house management. Technologies use
 - Java
 - Spring Boot
 - Spring Security
+- Spring Data
 - MySQL
 - HTML/CSS
 - Bootstrap
